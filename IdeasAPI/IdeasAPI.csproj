@@ -165,6 +165,8 @@
   <ItemGroup>
     <Content Include="app\js\loading-bar.js" />
     <Content Include="app\js\ngDialog.js" />
+    <Content Include="app\mock\item1.js" />
+    <Content Include="app\mock\item2.js" />
     <Content Include="app\mock\item.js" />
     <Content Include="app\mock\items.js" />
     <Content Include="app\scripts\app.js" />

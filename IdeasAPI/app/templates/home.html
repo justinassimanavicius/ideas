@@ -1,7 +1,16 @@
 <h2>List of ideas:</h2>
 
+<div>
+	Sort order
+	<select ng-model="sortOrder">
+		<option value="date">Date</option>
+		<option value="popularity">Popularity</option>
+	</select>
+	
+	Filter: <input ng-model="search" />
+</div>
 <ul>
-	<li ng-repeat="item in items">
+	<li ng-repeat="item in items | orderBy: sortOrder | filter:search:strict">
 		<a ng-href="{{'item/'+item.id}}">{{item.message}}</a>
 	</li>
 </ul>

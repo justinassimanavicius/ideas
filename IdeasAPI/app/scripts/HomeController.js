@@ -1,5 +1,8 @@
 (function (app) {
 	var homeController = function ($scope, itemService, ngDialog) {
+
+		$scope.sortOrder = "date";
+
 		itemService
 			.getItems()
 			.success(function (result) {
