@@ -1,8 +1,7 @@
 <h2>List of ideas:</h2>
 
 <ul>
-
-<li ><a href="item/1">idea 1</a></li>
-<li ><a href="item/2">idea 2</a></li>
-
+	<li ng-repeat="item in items">
+		<a ng-href="{{'item/'+item.id}}">{{item.name}}</a>
+	</li>
 </ul>
