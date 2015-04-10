@@ -29,6 +29,9 @@
 		-->
 		<script src="app/scripts/itemMockservice.js"></script>
 		<script src="app/scripts/createController.js"></script>
+
+	<script src="app/scripts/UserService.js"></script>
+	<script src="app/scripts/userController.js"></script>
 	</head>
 	<body ng-app="Ideas">
 		<nav class="navbar navbar-inverse navbar-embossed navbar-static-top" role="navigation">
@@ -54,7 +57,11 @@
 					<li><a href="create">Create</a></li>
 				</ul>
 			</nav>
-
+			
+			<div ng-controller="userController">
+				{{user.name}}
+				<img ng-src="{{user.avatar}}" />
+			</div>
 
 			<div ng-view></div>
 		</div>
