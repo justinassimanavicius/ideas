@@ -1,5 +1,5 @@
 (function () {
-	angular.module("Ideas", ["ngRoute", "ngAnimate"])
+	angular.module("Ideas", ["ngRoute", "ngAnimate", "ui.bootstrap"])
 		.config([
 			'$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 				$locationProvider.html5Mode(true).hashPrefix('!');
