@@ -28,10 +28,11 @@
 			<script src="app/scripts/itemservice.js"></script>
 		-->
 		<script src="app/scripts/itemMockservice.js"></script>
-		<script src="app/scripts/createController.js"></script>
+		<script src="app/scripts/createItemController.js"></script>
 
 	<script src="app/scripts/UserService.js"></script>
 	<script src="app/scripts/userController.js"></script>
+	<script src="app/scripts/CreateItemDirective.js"></script>
 	</head>
 	<body ng-app="Ideas">
 		<nav class="navbar navbar-inverse navbar-embossed navbar-static-top" role="navigation">
@@ -57,6 +58,8 @@
 					<li><a href="create">Create</a></li>
 				</ul>
 			</nav>
+			
+			<create-Item></create-Item>
 			
 			<div ng-controller="userController">
 				{{user.name}}

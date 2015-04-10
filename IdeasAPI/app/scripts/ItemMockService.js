@@ -12,7 +12,7 @@
 		var saveItem = function (item) {
 			var id = 1;
 			item.id = id;
-			return $http.post('app/mock/item' + id + '.js')
+			return $http.get('app/mock/item' + id + '.js')
 				.success(function() {
 				return item;
 			});
