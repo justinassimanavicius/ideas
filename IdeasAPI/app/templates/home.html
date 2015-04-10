@@ -1,7 +1,24 @@
-<h2>List of ideas:</h2>
+<div class="row">
+	<div class="col-xs-12">
+	<select ng-model="sortOrder" class="form-control">
+		<option value="date">Date</option>
+		<option value="popularity">Popularity</option>
+	</select>
+	</div>
+	<div class="col-xs-12">
+	<input ng-model="search" class="form-control" placeholder="Search for ideas" />
+	</div>
 
-<ul>
-	<li ng-repeat="item in items">
-		<a ng-href="{{'item/'+item.id}}">{{item.message}}</a>
+</div>
+<ul class="list-unstyled">
+	<li ng-repeat="item in items | orderBy: sortOrder | filter:search:strict" id="idea-{{item.id}}">
+		<div class="rating-control">
+			<a href="#" class="up">Up</a>
+			<span class="rating">{{item.rating}}</span>
+			<a href="#" class="down">Down</a>
+		</div>
+		<a ng-href="{{'item/'+item.id}}">
+			<div class="message">{{item.message}}</div>
+			<div class="meta"><span class="author">{{item.status}}</span> | <span class="author">{{item.author}}</span> | <span class="comments">{{item.comments}}</span></div></a>
 	</li>
 </ul>

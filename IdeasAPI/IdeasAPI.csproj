@@ -180,12 +180,15 @@
   <ItemGroup>
     <Content Include="app\js\loading-bar.js" />
     <Content Include="app\js\ngDialog.js" />
+    <Content Include="app\mock\item1.js" />
+    <Content Include="app\mock\item2.js" />
     <Content Include="app\mock\item.js" />
     <Content Include="app\mock\items.js" />
     <Content Include="app\scripts\app.js" />
     <Content Include="app\scripts\CreateController.js" />
     <Content Include="app\scripts\HomeController.js" />
     <Content Include="app\scripts\ItemController.js" />
+    <Content Include="app\scripts\ItemMockService.js" />
     <Content Include="app\scripts\ItemService.js" />
     <Content Include="app\styles\ngDialog-theme-default.css" />
     <Content Include="app\styles\ngDialog-theme-plain.css" />

@@ -1,15 +1,15 @@
 (function (app) {
 	var itemService = function ($http ) {
 		
-		getItems = function(){
+		var getItems = function(){
 			return $http.get('api/entry');
 		}
 		
-		getItem = function(id){
+		var getItem = function(id){
 			return $http.get('api/entry/' + id);
 		}
 
-		saveItem = function (item) {
+		var saveItem = function (item) {
 			return $http.post('api/entry', item);
 		}
 		
