@@ -4,8 +4,11 @@
             $locationProvider.html5Mode(true).hashPrefix('!');
             $routeProvider
             .when("/", {
-                templateUrl: "app/templates/home.html",
-                controller: "homeController"
+            	templateUrl: "app/templates/home.html",
+            	controller: "homeController"
+            }).when("/create", {
+            	templateUrl: "app/templates/create.html",
+            	controller: "createController"
             })
             .when("/item/:id", {
             	templateUrl: "app/templates/item.html",

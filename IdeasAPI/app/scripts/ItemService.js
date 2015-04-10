@@ -8,10 +8,15 @@
 		getItem = function(id){
 			return $http.get('app/mock/item.js');
 		}
+
+		saveItem = function (item) {
+			return $http.post('api/entry', item);
+		}
 		
 		return {
 			getItems : getItems,
-			getItem : getItem
+			getItem: getItem,
+			saveItem: saveItem
 		}
 	};
 
