@@ -2,11 +2,11 @@
 	var itemService = function ($http ) {
 		
 		getItems = function(){
-			return $http.get('/mock/items.js');			
+			return $http.get('app/mock/items.js');			
 		}
 		
 		getItem = function(id){
-			return $http.get('/mock/item.js');			
+			return $http.get('app/mock/item.js');
 		}
 		
 		return {
