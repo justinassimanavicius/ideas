@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Security.Principal;
+using IdeasAPI.Code;
 using IdeasAPI.Helpers;
 
 namespace IdeasAPI.Controllers
@@ -14,33 +15,37 @@ namespace IdeasAPI.Controllers
         [Authorize]
         public IHttpActionResult Get()
         {
-	        var displayUser = UserHelper.DisplayUser(User.Identity);
+            //Tries to get cacheable user info from AD
+	        var user = UserContext.GetUserInformation(User.Identity);
 
-	        var result = new
-	        {
-		        Name = displayUser["mail-0"],
-				Avatar = "avatar",
-				IsModerator = true
-	        };
-
-	        return Ok(result);
-        }
-
-	    [Authorize]
-        [HttpGet]
-        [Route("api/user/getImage")]
-        public IHttpActionResult GetImage()
-        {
-            var userInfo = UserHelper.DisplayUser(User.Identity);
-
-            var thumbnailBase64 = userInfo.FirstOrDefault(x => x.Key.ToString() == "thumbnailphoto-0");
-
-            if (thumbnailBase64.Value == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(thumbnailBase64.Value);
+            //TODO: Remove hardcode
+            user.IsModerator = true;
+
+	        return Ok(user);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/user/{userName}")]
+        public IHttpActionResult GetInfo(string userName)
+        {
+            //Tries to get cacheable user info from AD
+            var user = UserContext.GetUserInformationByUserName(User.Identity, userName);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            //TODO: Remove hardcode
+            user.IsModerator = true;
+
+            return Ok(user);
         }
     }
 }

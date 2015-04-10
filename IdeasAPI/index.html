@@ -25,6 +25,10 @@
 	
 	<script src="app/scripts/itemMockservice.js"></script>
 	<script src="app/scripts/createItemController.js"></script>
+    
+        <!--<script src="app/scripts/UserService.js"></script>-->
+        
+    
 	
 	<script src="app/scripts/UserServiceMock.js"></script>
 	<script src="app/scripts/userController.js"></script>
@@ -50,7 +54,7 @@
 						</ul>
 					<ul class="nav navbar-nav navbar-right" ng-controller="userController">
 
-					<li><a href="#"class="user" role="button"><div class="avatar hidden-xs"><img ng-src="{{user.avatar}}" width="32px" /></div> {{user.name}} </a>
+					<li><a href="#"class="user" role="button"><div class="avatar hidden-xs"><img ng-src="data:image/jpeg;base64,{{user.thumbnail}}" width="32px" /></div> {{user.name}} </a>
 							</li>
 
 							<li><a href="#">Log out</a>
