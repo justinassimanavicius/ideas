@@ -4,7 +4,14 @@
 		$scope.item = {};
 
 		$scope.saveItem = function() {
-			itemService.saveItem($scope.item);
+			itemService
+				.saveItem($scope.item)
+				.success(function() {
+					ngDialog.open({
+						template: '<p>my template</p>',
+						plain: true
+					});
+			});
 		}
 
 	};

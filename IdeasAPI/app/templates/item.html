@@ -1,5 +1,31 @@
-<h2>Das ist item {{item.name}} with id {{item.id}}</h2>
+<h2>{{item.message}}</h2>
 
+<div class="row" ng-show="item.assignee">
+	<span class="col-xs-6">Assignee</span>
+	<span class="col-xs-6">{{item.assignee.username}}</span>
+</div>
 
+<div class="row">
+	<span class="col-xs-6">Author</span>
+	<span class="col-xs-6">{{item.author.username}}</span>
+</div>
 
+<div class="row" ng-show>
+	<span class="col-xs-6">CreateDate</span>
+	<span class="col-xs-6">{{item.createDate}}</span>
+</div>
 
+<div class="row" ng-show>
+	<span class="col-xs-6">Status</span>
+	<span class="col-xs-6">{{item.status}}</span>
+</div>
+
+<div class="row" ng-show>
+	<span class="col-xs-6">Visibility</span>
+	<span class="col-xs-6">{{item.visibility}}</span>
+</div>
+
+<div class="row" ng-show>
+	<span class="col-xs-6">Source</span>
+	<span class="col-xs-6">{{item.source}}</span>
+</div>

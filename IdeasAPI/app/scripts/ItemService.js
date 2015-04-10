@@ -2,11 +2,11 @@
 	var itemService = function ($http ) {
 		
 		getItems = function(){
-			return $http.get('app/mock/items.js');			
+			return $http.get('api/entry');
 		}
 		
 		getItem = function(id){
-			return $http.get('app/mock/item.js');
+			return $http.get('api/entry/' + id);
 		}
 
 		saveItem = function (item) {
