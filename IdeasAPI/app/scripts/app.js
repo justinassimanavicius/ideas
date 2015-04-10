@@ -1,5 +1,5 @@
 (function () {
-	angular.module("Ideas", ["ngRoute", "ngAnimate", 'angular-loading-bar', 'mgcrea.ngStrap', 'mgcrea.ngStrap.collapse'])
+	angular.module("Ideas", ["ngRoute", "ngAnimate"])
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $locationProvider.html5Mode(true).hashPrefix('!');
             $routeProvider
@@ -13,10 +13,6 @@
             })
             .otherwise({ redirectTo: "/" });
 
-        }])
-        .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-            cfpLoadingBarProvider.includeBar = true;
-            cfpLoadingBarProvider.includeSpinner = false;
         }]);
    
 }());

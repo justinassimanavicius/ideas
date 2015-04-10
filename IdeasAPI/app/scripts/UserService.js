@@ -7,7 +7,7 @@
 				setTimeout(function() {
 					var object = {
 						name: "Jonas Jankauskas",
-						avatar: "home/dicpic"
+						avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
 					};
 					resolve(object);
 
