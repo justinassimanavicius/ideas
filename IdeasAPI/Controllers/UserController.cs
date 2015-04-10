@@ -31,7 +31,7 @@ namespace IdeasAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(UserHelper.Base64ToImage(thumbnailBase64.Value as Byte[]));
+            return Ok(thumbnailBase64.Value);
         }
     }
 }
