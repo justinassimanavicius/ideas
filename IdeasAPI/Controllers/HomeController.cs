@@ -11,16 +11,7 @@ namespace IdeasAPI.Controllers
     {
         public ActionResult Index()
         {
-            var userInfo = UserHelper.DisplayUser(User.Identity);
-
-            var thumbnailBase64 = userInfo.FirstOrDefault(x => x.Key.ToString() == "thumbnailphoto-0");
-
-            if (thumbnailBase64.Value == null)
-            {
-                return File("/index.html", "text/html");
-            }
-
-            return File(thumbnailBase64.Value as Byte[], "image/jpeg");
+            return File("/index.html", "text/html");
         }
     }
 }
