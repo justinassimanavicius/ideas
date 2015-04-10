@@ -14,10 +14,18 @@ namespace IdeasAPI.Controllers
         [Authorize]
         public IHttpActionResult Get()
         {
-            return Ok(UserHelper.DisplayUser(User.Identity));
+	        var displayUser = UserHelper.DisplayUser(User.Identity);
+
+	        var result = new
+	        {
+		        Name = displayUser["mail-0"],
+				Avatar = "avatar"
+	        };
+
+	        return Ok(result);
         }
 
-        [Authorize]
+	    [Authorize]
         [HttpGet]
         [Route("api/user/getImage")]
         public IHttpActionResult GetImage()

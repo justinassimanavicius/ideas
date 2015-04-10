@@ -13,6 +13,13 @@ namespace IdeasAPI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+			routes.MapRoute(
+				name: "avatar",
+				url: "avatar",
+				defaults: new { controller = "Home", action = "DicPic", id = UrlParameter.Optional }
+			);
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{*pathInfo}",

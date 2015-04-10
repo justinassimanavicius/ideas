@@ -1,18 +1,10 @@
 (function (app) {
-	var userService = function ($http, $q) {
+	var userService = function ($http) {
 		
 		var getUser = function() {
 
-			return $q(function(resolve, reject) {
-				setTimeout(function() {
-					var object = {
-						name: "Jonas Jankauskas",
-						avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
-					};
-					resolve(object);
+			return $http.get("api/user").then(function (result){return result.data});
 
-				}, 1000);
-			});
 		}
 
 
@@ -21,5 +13,5 @@
 		}
 	};
 
-	app.service("userService", ["$http", "$q", userService]);
+	app.service("userService", ["$http", userService]);
 }(angular.module("Ideas")));
