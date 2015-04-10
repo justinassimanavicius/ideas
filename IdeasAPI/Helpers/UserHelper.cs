@@ -1,64 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.DirectoryServices;
 using System.Security.Principal;
 using System.Collections;
 using System.Drawing;
 using System.IO;
+using IdeasAPI.Models;
 
 namespace IdeasAPI.Helpers
 {
     public static class UserHelper
     {
-        public static Dictionary<object, object> DisplayUser(IIdentity id)
+        public static string GetUserNameFromIdentity(IIdentity id)
         {
-            var result = new Dictionary<object, object>();
+            if (id == null) return "";
+            return id.Name.Split('\\')[1] ?? id.Name;
+        }
 
-            WindowsIdentity winId = id as WindowsIdentity;
-            if (id == null)
+        public static User GetCurrentUserFromAD(IIdentity id)
+        {
+            return GetUserFromAD(id, null);
+        }
+
+        public static User GetUserFromADByUserName(IIdentity id, string userName)
+        {
+            return GetUserFromAD(id, userName);
+        }
+
+        /// <summary>
+        /// Private method for retrieving user information from active directory
+        /// </summary>
+        /// <param name="id">current user identity</param>
+        /// <param name="userName">domain username</param>
+        /// <returns>User object</returns>
+        private static User GetUserFromAD(IIdentity id, string userName)
+        {
+            var result = new User();
+
+            var winId = id as WindowsIdentity;
+
+            if (winId == null)
             {
                 Console.WriteLine("Identity is not a windows identity");
                 return result;
             }
 
-            string userInQuestion = winId.Name.Split('\\')[1];
-            string myDomain = winId.Name.Split('\\')[0]; // this is the domain that the user is in
-            // the account that this program runs in should be authenticated in there                    
-            DirectoryEntry entry = new DirectoryEntry("LDAP://" + myDomain);
-            DirectorySearcher adSearcher = new DirectorySearcher(entry);
+            userName = userName ?? winId.Name.Split('\\')[1];
+            var domain = winId.Name.Split('\\')[0];
 
-            adSearcher.SearchScope = SearchScope.Subtree;
-            adSearcher.Filter = "(&(objectClass=user)(samaccountname=" + userInQuestion + "))";
-            SearchResult userObject = adSearcher.FindOne();
-            if (userObject != null)
+            var entry = new DirectoryEntry("LDAP://" + domain);
+            var adSearcher = new DirectorySearcher(entry)
             {
-                foreach (DictionaryEntry property in userObject.Properties)
-                {
-                    var valueCollenction = property.Value as ResultPropertyValueCollection;
-                    if (valueCollenction != null)
-                        for (int i = 0; i < valueCollenction.Count; i++)
-                        {
-                            result.Add(string.Format("{0}-{1}", property.Key, i), valueCollenction[i]);
-                        }
-                }
-            }
+                SearchScope = SearchScope.Subtree,
+                Filter = "(&(objectClass=user)(samaccountname=" + userName + "))"
+            };
+
+            var userObject = adSearcher.FindOne();
+
+            if (userObject == null) return result;
+
+            result.Name = userObject.Properties["displayname"][0].ToString();
+            result.ShortName = userObject.Properties["givenname"][0].ToString();
+            result.Thumbnail = userObject.Properties["thumbnailphoto"][0] as byte[];
+            result.BirthDay = DateTime.Parse(userObject.Properties["extensionattribute1"][0].ToString());
+            result.Email = userObject.Properties["mail"][0].ToString();
+            result.DomainName = userObject.Properties["samaccountname"][0].ToString();
 
             return result;
-        }
-
-        public static Image Base64ToImage(byte[] base64String)
-        {
-            // Convert Base64 String to byte[]
-            byte[] imageBytes = base64String;
-            MemoryStream ms = new MemoryStream(imageBytes, 0,
-              imageBytes.Length);
-
-            // Convert byte[] to Image
-            ms.Write(imageBytes, 0, imageBytes.Length);
-            Image image = Image.FromStream(ms, true);
-            return image;
         }
     }
 }
