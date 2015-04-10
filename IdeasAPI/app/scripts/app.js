@@ -1,5 +1,5 @@
 (function () {
-	angular.module("Ideas", ["ngRoute", "ngAnimate", 'angular-loading-bar', "ngDialog"])
+	angular.module("Ideas", ["ngRoute", "ngAnimate", 'angular-loading-bar'])
         .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
             $locationProvider.html5Mode(true).hashPrefix('!');
             $routeProvider
@@ -20,15 +20,6 @@
         .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
             cfpLoadingBarProvider.includeBar = true;
             cfpLoadingBarProvider.includeSpinner = false;
-        }])
-		.config(['ngDialogProvider', function (ngDialogProvider) {
-        	ngDialogProvider.setDefaults({
-        		className: 'ngdialog-theme-default ',
-        		plain: true,
-        		showClose: true,
-        		closeByDocument: true,
-        		closeByEscape: true
-        	});
         }]);
    
 }());

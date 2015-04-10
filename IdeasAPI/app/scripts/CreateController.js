@@ -1,5 +1,5 @@
 (function (app) {
-	var createController = function ($scope, itemService, ngDialog) {
+	var createController = function ($scope, itemService) {
 
 		$scope.item = {};
 
@@ -16,5 +16,5 @@
 
 	};
 
-	app.controller("createController", ["$scope", "itemService", "ngDialog", createController]);
+	app.controller("createController", ["$scope", "itemService", createController]);
 }(angular.module("Ideas")));
