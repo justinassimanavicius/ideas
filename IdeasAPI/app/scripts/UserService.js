@@ -6,8 +6,8 @@
 			return $q(function(resolve, reject) {
 				setTimeout(function() {
 					var object = {
-						name: "Jonas",
-						avatar: "http://t0.gstatic.com/images?q=tbn:ANd9GcQyCEyETo6F5StYkcs2lyapx_uyZK40Lw7oIktFTSWbDcR5JusjqA"
+						name: "Jonas Jankauskas",
+						avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/gerrenlamson/128.jpg"
 					};
 					resolve(object);
 

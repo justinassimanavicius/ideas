@@ -42,9 +42,14 @@
 					</button>
 					<a class="navbar-brand" href="home">Nortal Ideas</a>
 				</div>
+				
 				<div class="collapse navbar-collapse" id="navbar-collapse-01">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="home">Ideas</a></li>	
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#" ng-controller="userController" class="profile-image"><img ng-src="{{user.avatar}}" width="32px" /> {{user.name}}</a></li>
+						<li><a href="#">Log out</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
@@ -56,10 +61,6 @@
 				</ul>
 			</nav>
 			
-			<div ng-controller="userController">
-				{{user.name}}
-				<img ng-src="{{user.avatar}}" />
-			</div>
 
 			<div ng-view></div>
 		</div>
