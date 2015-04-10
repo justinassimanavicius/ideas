@@ -1,14 +1,34 @@
-<h1>Ideas</h1>
-<a href="create">Create</a>
-<a href="#" ng-click="showAll()">show all</a>
-<a href="#" ng-click="showMy()">show my</a>
-<a href="#" ng-show="isModerator" ng-click="showUnaproved()">show unaproved</a>
+<nav class="clear" id="subnav">
+	<ul>
+		<li class="settings">
+			<span class="dropdown" dropdown on-toggle="toggled(open)">
+				<a href="#">
+					<small><span class="fui-gear"></span></small>
+					<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href>Popularity</a>
+					</li>
+					<li>
+						<a href>Date</a>
+					</li>
+				</ul>
+	    	</span>
+	    </li>
+		<li><a href="#" ng-click="showAll()" class="active">All</a></li>
+		<li><a href="#" ng-click="showMy()">My ideas</a></li>
+		<li><a href="#" ng-show="isModerator" ng-click="showUnaproved()">Pending</a></li>
+	</ul>
+</nav>
+<!-- <a href="create">Create</a>
+
 
 
 		<select ng-model="sortOrder" class="form-control">
 			<option value="date">Date</option>
 			<option value="popularity">Popularity</option>
-		</select>
+		</select>-->
 
 <div class="ideas">
 	<div class="idea-search"><input ng-model="search" class="form-control" placeholder="Search for ideas" /></div>
@@ -31,7 +51,5 @@
 		</li>
 		<p ng-hide="(items | filter:search:strict | filter:selectedFilter).length">Nothing here!</p>
 	</ul>
-	
-	
 </div>
 
