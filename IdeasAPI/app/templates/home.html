@@ -1,3 +1,7 @@
+<a href="#" ng-click="showAll()">show all</a>
+<a href="#" ng-click="showMy()">show my</a>
+<a href="#" ng-show="isModerator" ng-click="showUnaproved()">show unaproved</a>
+
 <div class="row">
 	<div class="col-xs-12">
 	<select ng-model="sortOrder" class="form-control">
@@ -11,7 +15,7 @@
 
 </div>
 <ul class="list-unstyled">
-	<li ng-repeat="item in items | orderBy: sortOrder | filter:search:strict" id="idea-{{item.id}}">
+	<li ng-repeat="item in items | orderBy: sortOrder | filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">
 		<div class="rating-control">
 			<a href="#" class="up">Up</a>
 			<span class="rating">{{item.rating}}</span>
@@ -19,6 +23,7 @@
 		</div>
 		<a ng-href="{{'item/'+item.id}}">
 			<div class="message">{{item.message}}</div>
-			<div class="meta"><span class="author">{{item.status}}</span> | <span class="author">{{item.author}}</span> | <span class="comments">{{item.comments}}</span></div></a>
+			<div class="meta"><span class="author">{{item.status}}</span> | <span class="author">{{item.author}}</span> | <span class="comments">{{item.comments}}</span></div>
+		</a>
 	</li>
 </ul>

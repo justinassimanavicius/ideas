@@ -19,7 +19,8 @@ namespace IdeasAPI.Controllers
 	        var result = new
 	        {
 		        Name = displayUser["mail-0"],
-				Avatar = "avatar"
+				Avatar = "avatar",
+				IsModerator = true
 	        };
 
 	        return Ok(result);

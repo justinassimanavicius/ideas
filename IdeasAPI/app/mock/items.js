@@ -13,7 +13,7 @@
 	"message": "New simple WYSIWYG content editor with column support New simple WYSIWYG content editor with column support Auto-Generate Facebook-style Link Preview when inserting URL into Editor",
 	"id": 2,
 	"vote": 11,
-	"author": "Shonda Rhymes",
+	"author": "Jonas Jankauskas",
 	"status": "Pending",
 	"comments": 5
 }
