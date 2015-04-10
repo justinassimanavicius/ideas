@@ -163,12 +163,28 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\js\loading-bar.js" />
+    <Content Include="app\js\ngDialog.js" />
+    <Content Include="app\mock\item.js" />
+    <Content Include="app\mock\items.js" />
+    <Content Include="app\scripts\app.js" />
+    <Content Include="app\scripts\HomeController.js" />
+    <Content Include="app\scripts\ItemController.js" />
+    <Content Include="app\scripts\ItemService.js" />
+    <Content Include="app\styles\ngDialog-theme-default.css" />
+    <Content Include="app\styles\ngDialog-theme-plain.css" />
+    <Content Include="app\styles\ngDialog.css" />
+    <Content Include="app\styles\style.css" />
+    <Content Include="app\templates\home.html" />
+    <Content Include="app\templates\item-in-list.html" />
+    <Content Include="app\templates\item.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
