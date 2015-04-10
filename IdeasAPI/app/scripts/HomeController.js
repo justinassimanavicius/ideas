@@ -1,5 +1,5 @@
 (function (app) {
-	var homeController = function ($scope, itemService, ngDialog) {
+	var homeController = function ($scope, itemService) {
 		itemService
 			.getItems()
 			.success(function (result) {
