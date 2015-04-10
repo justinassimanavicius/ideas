@@ -7,7 +7,8 @@
 				
 					var object = {
 						name: "Jonas Jankauskas",
-						avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
+						avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg",
+						isModerator: true
 					};
 					resolve(object);
 
