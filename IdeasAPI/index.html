@@ -32,9 +32,9 @@
 		<script src="app/scripts/itemMockservice.js"></script>
 		<script src="app/scripts/createItemController.js"></script>
 
-	<script src="app/scripts/UserService.js"></script>
-	<script src="app/scripts/userController.js"></script>
-	<script src="app/scripts/CreateItemDirective.js"></script>
+		<script src="app/scripts/UserService.js"></script>
+		<script src="app/scripts/userController.js"></script>
+		<script src="app/scripts/CreateItemDirective.js"></script>
 	</head>
 	<body ng-app="Ideas">
 		
@@ -48,20 +48,20 @@
 					</button>
 					<a class="navbar-brand" href="home">Nortal Ideas</a>
 				</div>
+				
 				<div class="collapse navbar-collapse" id="navbar-collapse-01">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="home">Ideas</a></li>	
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#" ng-controller="userController" class="profile-image"><img ng-src="{{user.avatar}}" width="32px" /> {{user.name}}</a></li>
+						<li><a href="#">Log out</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</nav><!-- /navbar -->
 		<div class="container">
 			<create-Item></create-Item>
-			
-			<div ng-controller="userController">
-				{{user.name}}
-				<img ng-src="{{user.avatar}}" />
-			</div>
 			
 			<div ng-view></div>
 		</div>
