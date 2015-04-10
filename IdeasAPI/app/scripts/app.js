@@ -7,6 +7,9 @@
 					.when("/", {
 						templateUrl: "app/templates/home.html",
 						controller: "homeController"
+					}).when("/create", {
+						templateUrl: "app/templates/createItem.html",
+						controller: "createItemController"
 					})
 					.when("/item/:id", {
 						templateUrl: "app/templates/item.html",
