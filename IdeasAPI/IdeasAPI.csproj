@@ -171,6 +171,7 @@
     <Content Include="app\scripts\CreateController.js" />
     <Content Include="app\scripts\HomeController.js" />
     <Content Include="app\scripts\ItemController.js" />
+    <Content Include="app\scripts\ItemMockService.js" />
     <Content Include="app\scripts\ItemService.js" />
     <Content Include="app\styles\ngDialog-theme-default.css" />
     <Content Include="app\styles\ngDialog-theme-plain.css" />
