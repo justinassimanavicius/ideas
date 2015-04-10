@@ -1,1 +1,5 @@
 - Login / Logout
+– Siųsti laišką moderatoriams
+- Iškelti kūrimą į atskirą puslapį
+– Kūrimui pridėti papildomą lauką “tema”
+- Padaryti filtravimą “Mano idėjos”, “Visos idėjos” ir tik moderatoriams matomą “Pending idėjos”

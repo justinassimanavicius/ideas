@@ -37,33 +37,33 @@
 		<script src="app/scripts/CreateItemDirective.js"></script>
 	</head>
 	<body ng-app="Ideas">
-		
-		
-
-		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-						<span class="sr-only">Toggle navigation</span>
-					</button>
-					<a class="navbar-brand" href="home">Nortal Ideas</a>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="navbar-collapse-01">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="home">Ideas</a></li>	
-					</ul>
+		<header>
+			<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+							<span class="sr-only">Toggle navigation</span>
+						</button>
+						<a class="navbar-brand" href="home">Nortal Ideas</a>
+					</div>
+					
+					<div class="collapse navbar-collapse" id="navbar-collapse-01">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="home">Ideas</a></li>	
+						</ul>
 					<ul class="nav navbar-nav navbar-right" ng-controller="userController">
 
-						<li><a href="#" class="profile-image"><img ng-src="{{user.avatar}}" class="hidden-xs" width="32px" /> {{user.name}}</a></li>
-						<li><a href="#">Log out</a></li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div>
-		</nav><!-- /navbar -->
-		<div class="container">
-			<create-Item></create-Item>
-			
+					<li><a href="#"class="profile-image" role="button"><img ng-src="{{user.avatar}}" class="hidden-xs" width="32px" /> {{user.name}} </a>
+							</li>
+
+							<li><a href="#">Log out</a>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<create-Item></create-Item>
+		<div class="container">	
 			<div ng-view></div>
 		</div>
 		<footer>
