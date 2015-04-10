@@ -1,6 +1,8 @@
-﻿<div ng-controller="createItemController">
-	<form ng-submit="saveItem()">
-		<div class="form-group"><label class="sr-only">Idea</label><textarea class="form-control" name="name" ng-model="item.message" placeholder="Write something..."></textarea></div>
-		<input class="btn btn-primary" type="submit" />
-	</form>
+﻿<div class="hero">
+	<div class="container" ng-controller="createItemController">
+		<form ng-submit="saveItem()">
+			<div class="form-group"><label class="sr-only">Idea</label><textarea class="form-control" name="name" ng-model="item.message" placeholder="Spread your idea..."></textarea></div>
+			<input class="btn btn-primary" type="submit" value="Share!" />
+		</form>
+	</div>
 </div>
