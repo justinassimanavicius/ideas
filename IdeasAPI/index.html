@@ -15,6 +15,8 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-animate.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-touch.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-sanitize.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
 
 	<script src="app/js/loading-bar.js"></script>
 
@@ -35,6 +37,9 @@
 	<script src="app/scripts/CreateItemDirective.js"></script>
 	</head>
 	<body ng-app="Ideas">
+		
+		
+
 		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
@@ -51,23 +56,18 @@
 			</div>
 		</nav><!-- /navbar -->
 		<div class="container">
-			<nav>
-				<ul>
-					<li><a href="create">Create</a></li>
-				</ul>
-			</nav>
-			
 			<create-Item></create-Item>
 			
 			<div ng-controller="userController">
 				{{user.name}}
 				<img ng-src="{{user.avatar}}" />
 			</div>
-
+			
 			<div ng-view></div>
 		</div>
 		<footer>
 			<div class="container">Made with love in Nortal</div>
 		</footer>
+		
 	</body>
 </html>
