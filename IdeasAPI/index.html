@@ -8,13 +8,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge; chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>Ideas</title>
-	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-cookies.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-route.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-touch.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-sanitize.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.min.js"></script>
 
 
 	<link href="Content/css/main.css" rel="stylesheet">
@@ -22,20 +22,13 @@
 	<script src="app/scripts/app.js"></script>
 	<script src="app/scripts/homecontroller.js"></script>
 	<script src="app/scripts/itemcontroller.js"></script>
-	<!--
-			<script src="app/scripts/itemservice.js"></script>
-		-->
-		<script src="app/scripts/itemMockservice.js"></script>
-		<script src="app/scripts/createItemController.js"></script>
-	<!--
-		<script src="app/scripts/UserService.js"></script>
-		-->
+	
+	<script src="app/scripts/itemMockservice.js"></script>
+	<script src="app/scripts/createItemController.js"></script>
+	
 	<script src="app/scripts/UserServiceMock.js"></script>
-
 	<script src="app/scripts/userController.js"></script>
-	
-	<script src="app/scripts/CreateItemDirective.js"></script>
-	
+	<script src="app/scripts/CreateItemDirective.js"></script>	
 	<script src="app/scripts/HeaderController.js"></script>
 
 </head>
@@ -44,20 +37,20 @@
 			<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+						<button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
 							<span class="sr-only">Toggle navigation</span>
 						</button>
 						<a class="navbar-brand" href="home">Nortal Ideas</a>
 					</div>
 					
-					<div class="collapse navbar-collapse" id="navbar-collapse-01">
+					<div class="collapse navbar-collapse" collapse="navCollapsed">
 						<ul class="nav navbar-nav">
 							<li ng-class="{ active: isActive('/')}"><a href="home">Ideas</a></li>	
-							<li ng-class="{ active: isActive('/create')}"><a href="create">Create</a></li>	
+								
 						</ul>
 					<ul class="nav navbar-nav navbar-right" ng-controller="userController">
 
-					<li><a href="#"class="profile-image" role="button"><img ng-src="{{user.avatar}}" class="hidden-xs" width="32px" /> {{user.name}} </a>
+					<li><a href="#"class="user" role="button"><div class="avatar hidden-xs"><img ng-src="{{user.avatar}}" width="32px" /></div> {{user.name}} </a>
 							</li>
 
 							<li><a href="#">Log out</a>
@@ -72,8 +65,7 @@
 			</div>
 		</div>
 		<footer>
-			<div class="container">Made with love in Nortal</div>
+			<div class="container">Lovingly made in Nortal</div>
 		</footer>
-		<script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
 	</body>
 </html>

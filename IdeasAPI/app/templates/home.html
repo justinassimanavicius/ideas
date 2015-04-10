@@ -1,27 +1,31 @@
+<h1>Ideas</h1>
+<a href="create">Create</a>
 <a href="#" ng-click="showAll()">show all</a>
 <a href="#" ng-click="showMy()">show my</a>
 <a href="#" ng-show="isModerator" ng-click="showUnaproved()">show unaproved</a>
 
-<div class="row">
-	<div class="col-xs-12">
+
 		<select ng-model="sortOrder" class="form-control">
 			<option value="date">Date</option>
 			<option value="popularity">Popularity</option>
 		</select>
-	</div>
-	<div class="col-xs-12">
-		<input ng-model="search" class="form-control" placeholder="Search for ideas" />
-	</div>
-</div>
+
 <div class="ideas">
+	<div class="idea-search"><input ng-model="search" class="form-control" placeholder="Search for ideas" /></div>
 	<ul>
 		<li ng-repeat="item in items | orderBy: sortOrder | filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">
 			<a ng-href="{{'item/'+item.id}}">
+				
+				<div class="idea-rating">{{ item.vote > 999 ? '&infin;' : item.vote}}</div>
 				<div class="idea-content">
 					<h4 class="idea-name">
 					{{item.title}}
 					</h4>
-					<span class="author">{{item.status}}</span> | <span class="author">{{item.author}}</span> | <span class="comments">{{item.comments}}</span>
+					<ul class="list-inline">
+						<li class="author">{{item.status}}</li>
+						<li class="author"><span class="fui-user"></span> {{item.author}}</li>
+						<li class="comments"><span class="fui-bubble"></span> {{item.comments}}</li>
+					</ul>
 				</div>
 			</a>
 		</li>

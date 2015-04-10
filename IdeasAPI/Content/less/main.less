@@ -11,7 +11,7 @@
 
 // Reset and dependencies
 @import "@{boot}normalize";
-@import "@{boot}print";
+// @import "@{boot}print";
 @import "@{boot}glyphicons";
 
 // Core CSS
@@ -89,13 +89,13 @@
 //@import "@{flat}modules/pagination";
 //@import "@{flat}modules/tooltip";
 // @import "@{flat}modules/dropdowns";
-@import "@{flat}modules/select";
+// @import "@{flat}modules/select";
 // @import "@{flat}modules/tiles";
 @import "@{flat}modules/navbar";
 // @import "@{flat}modules/switch";
 // @import "@{flat}modules/share";
 // @import "@{flat}modules/video";
-@import "@{flat}modules/todo-list";
+// @import "@{flat}modules/todo-list";
 
 // Examples
 // @import "@{flat}modules/palette";
@@ -110,47 +110,99 @@
 
 // New variables
 @icon-font-path: "../../assets/flat-ui/fonts/glyphicons/";
+@body-bg: @clouds;
 @brand-primary: #001223;
 @brand-secondary: #26A948;
 @navbar-inverse-bg: @brand-primary;
 
 
 // Additional style
+// Global
+.form-control {
+  .placeholder(@gray);
+}
 
+.nav, .pagination { cursor: pointer; }
+// Header
+.navbar {
+	margin-bottom: 0;
+}
 
-.profile-image {;
-    img {
+.user {;
+    .avatar {
     	border-radius: 4px;
     	margin-right: 5px;
     	position: relative;
 		top: -5px;
 		float: left;
 		left: -5px;
+		overflow: hidden;
+		width: 32px;
+		height: 32px;
     }
 }
 
+.content {
+	background-color: #FFF;
+	padding-bottom: 20px;
+}
+
 .ideas {
-	
-	ul {
+	margin-top: 20px;
+	.idea-search {
+		background-color: @clouds;
+		padding: 10px 20px;
+		margin-bottom: 10px;
+	}
+	> ul {
 		.list-unstyled();
-		li {
+		> li {
     		font-size: 14px;
     		line-height: 1.214;
-			h4 {
-				font-size: 17px;
-	    		margin: 1px 0 3px;
+			border-top: 1px solid @clouds;
+			&:first-child {
+				border-top: 0 none;
 			}
 			a {
 				display: block;
 				cursor: pointer;
-				color: @brand-primary;
+				color: @concrete;
+				padding: 10px;
+				
+
 				&:hover, &:focus {
-					background-color: @clouds;
+					
+
+				}
+				// Idea's style
+				h4 {
+					font-size: 17px;
+		    		margin: 1px 0 3px;
+		    		color: @brand-primary;
+				}
+				.idea-content {
+					margin-left: 80px;
+				}
+				.idea-rating {
+					font-size: 35px;
+					float: left;
+					width: 70px;
+					overflow: hidden;
+					text-align: center;
 				}
 			}
+
 		}
 		
 	}
+}
+
+// Footer
+footer {
+	color: @gray;
+	padding: 10px 0;
+	font-size: 13px;
+	text-align: center;
 }
 
 
