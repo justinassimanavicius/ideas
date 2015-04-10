@@ -88,19 +88,19 @@
 //@import "@{flat}modules/pager";
 //@import "@{flat}modules/pagination";
 //@import "@{flat}modules/tooltip";
-@import "@{flat}modules/dropdowns";
+// @import "@{flat}modules/dropdowns";
 @import "@{flat}modules/select";
 // @import "@{flat}modules/tiles";
 @import "@{flat}modules/navbar";
 // @import "@{flat}modules/switch";
 // @import "@{flat}modules/share";
 // @import "@{flat}modules/video";
-// @import "@{flat}modules/todo-list";
+@import "@{flat}modules/todo-list";
 
 // Examples
 // @import "@{flat}modules/palette";
 // @import "@{flat}modules/login";
-@import "@{flat}modules/footer";
+// @import "@{flat}modules/footer";
 
 // Spaces
 // @import "@{flat}spaces";
@@ -110,10 +110,15 @@
 
 // New variables
 @icon-font-path: "../../assets/flat-ui/fonts/glyphicons/";
+@brand-primary: #001223;
+@brand-secondary: #26A948;
+@navbar-inverse-bg: @brand-primary;
 
 
 // Additional style
-.profile-image {
+
+
+.profile-image {;
     img {
     	border-radius: 4px;
     	margin-right: 5px;
@@ -122,6 +127,30 @@
 		float: left;
 		left: -5px;
     }
+}
+
+.ideas {
+	
+	ul {
+		.list-unstyled();
+		li {
+    		font-size: 14px;
+    		line-height: 1.214;
+			h4 {
+				font-size: 17px;
+	    		margin: 1px 0 3px;
+			}
+			a {
+				display: block;
+				cursor: pointer;
+				color: @brand-primary;
+				&:hover, &:focus {
+					background-color: @clouds;
+				}
+			}
+		}
+		
+	}
 }
 
 
