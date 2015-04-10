@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IdeasAPI.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace IdeasAPI.Controllers
     {
         public ActionResult Index()
         {
-			return File("/index.html", "text/html");
+            return File("/index.html", "text/html");
         }
     }
 }

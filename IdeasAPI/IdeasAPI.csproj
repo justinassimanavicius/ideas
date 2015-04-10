@@ -39,9 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -113,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -147,18 +155,25 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataContexts\IdeasDb.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201504101404130_InitialCreate.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201504101404130_InitialCreate.Designer.cs">
+      <DependentUpon>201504101404130_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\IdeasMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Models\EntryPriority.cs" />
     <Compile Include="Models\EntrySource.cs" />
     <Compile Include="Models\EntryStatus.cs" />
     <Compile Include="Models\EntryVisibility.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -170,22 +185,22 @@
     <Content Include="app\mock\item.js" />
     <Content Include="app\mock\items.js" />
     <Content Include="app\scripts\app.js" />
-    <Content Include="app\scripts\CreateController.js" />
+    <Content Include="app\scripts\CreateItemController.js" />
+    <Content Include="app\scripts\CreateItemDirective.js" />
     <Content Include="app\scripts\HomeController.js" />
     <Content Include="app\scripts\ItemController.js" />
     <Content Include="app\scripts\ItemMockService.js" />
     <Content Include="app\scripts\ItemService.js" />
+    <Content Include="app\scripts\UserController.js" />
+    <Content Include="app\scripts\UserService.js" />
     <Content Include="app\styles\ngDialog-theme-default.css" />
     <Content Include="app\styles\ngDialog-theme-plain.css" />
     <Content Include="app\styles\ngDialog.css" />
     <Content Include="app\styles\style.css" />
-    <Content Include="app\templates\create.html" />
+    <Content Include="app\templates\createItem.html" />
     <Content Include="app\templates\home.html" />
-    <Content Include="app\templates\item-in-list.html" />
     <Content Include="app\templates\item.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -227,7 +242,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -236,7 +250,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="DataContexts\IdeasMigrations\201504101404130_InitialCreate.resx">
+      <DependentUpon>201504101404130_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
