@@ -5,8 +5,13 @@
 			return $http.get('/mock/items.js');			
 		}
 		
+		getItem = function(id){
+			return $http.get('/mock/item.js');			
+		}
+		
 		return {
-			getItems : getItems
+			getItems : getItems,
+			getItem : getItem
 		}
 	};
 

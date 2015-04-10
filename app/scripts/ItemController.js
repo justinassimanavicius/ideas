@@ -1,7 +1,13 @@
 (function (app) {
-	var itemController = function ($scope, $routeParams) {
-		$scope.id = $routeParams.id;
+	var itemController = function ($scope, $routeParams, itemService) {
+		var id = $routeParams.id;
+		
+		itemService
+			.getItem(id)
+			.success(function (result) {
+                        $scope.item = result;
+                    });
 	};
 
-	app.controller("itemController", ["$scope", "$routeParams", itemController]);
+	app.controller("itemController", ["$scope", "$routeParams", "itemService", itemController]);
 }(angular.module("Ideas")));
