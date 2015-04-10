@@ -16,5 +16,5 @@
 
 	};
 
-	app.controller("createController", ["$scope", "itemService", createController]);
+	app.controller("createController", ["$scope", "itemService", "ngDialog", createController]);
 }(angular.module("Ideas")));
