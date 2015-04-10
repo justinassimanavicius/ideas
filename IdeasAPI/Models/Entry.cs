@@ -10,6 +10,7 @@ namespace IdeasAPI.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
         public DateTime CreateDate { get; set; }
         public Nullable<DateTime> UpdateDate { get; set; }

@@ -164,6 +164,10 @@
     <Compile Include="DataContexts\IdeasMigrations\201504101404130_InitialCreate.Designer.cs">
       <DependentUpon>201504101404130_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\IdeasMigrations\201504101641207_Entry_title.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201504101641207_Entry_title.Designer.cs">
+      <DependentUpon>201504101641207_Entry_title.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\IdeasMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +189,7 @@
     <Content Include="app\scripts\app.js" />
     <Content Include="app\scripts\CreateItemController.js" />
     <Content Include="app\scripts\CreateItemDirective.js" />
+    <Content Include="app\scripts\HeaderController.js" />
     <Content Include="app\scripts\HomeController.js" />
     <Content Include="app\scripts\ItemController.js" />
     <Content Include="app\scripts\ItemMockService.js" />
@@ -252,6 +257,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DataContexts\IdeasMigrations\201504101404130_InitialCreate.resx">
       <DependentUpon>201504101404130_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdeasMigrations\201504101641207_Entry_title.resx">
+      <DependentUpon>201504101641207_Entry_title.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
