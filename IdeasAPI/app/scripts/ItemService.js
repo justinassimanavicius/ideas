@@ -12,12 +12,27 @@
 		var saveItem = function (item) {
 			return $http.post('api/entry', item);
 		}
-		
-		return {
-			getItems : getItems,
-			getItem: getItem,
-			saveItem: saveItem
+
+		var vote = function (itemId, voteValue) {
+			return $http.post('api/entry/' + itemId + '/vote', voteValue);
 		}
+
+		var getComments = function(itemId) {
+			return $http.get('api/entry/' + itemId + '/comment');
+		}
+
+		var saveComment = function (itemId, comment) {
+			return $http.post('api/entry/' + itemId + '/comment', comment);
+		}
+
+		return {
+			getItems: getItems,
+			getItem: getItem,
+			saveItem: saveItem,
+			vote: vote,
+			getComments: getComments,
+			saveComment: saveComment
+	}
 	};
 
 	app.service("itemService", ["$http", "$q", itemService]);

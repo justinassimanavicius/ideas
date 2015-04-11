@@ -1,6 +1,9 @@
 <h2>{{item.title}}</h2>
 
-<div class="row" ng-show="item.message">
+<button class="btn" ng-click="upvote()">+</button>
+<button class="btn" ng-click="downvote()">-</button>
+
+<div class="row" >
 	<span class="col-xs-6">Message</span>
 	<span class="col-xs-6">{{item.message}}</span>
 </div>
@@ -11,17 +14,47 @@
 	<span class="col-xs-6">{{item.author}}</span>
 </div>
 
-<div class="row" ng-show>
+<div class="row" >
 	<span class="col-xs-6">Vote</span>
 	<span class="col-xs-6">{{item.vote}}</span>
 </div>
 
-<div class="row" ng-show>
+<div class="row" >
 	<span class="col-xs-6">Status</span>
 	<span class="col-xs-6">{{item.status}}</span>
 </div>
 
-<div class="row" ng-show>
+<div class="row" >
 	<span class="col-xs-6">Comments</span>
 	<span class="col-xs-6">{{item.comments}}</span>
 </div>
+
+<div class="row" >
+	<span class="col-xs-6">Create Date</span>
+	<span class="col-xs-6">{{item.createDate}}</span>
+</div>
+
+
+<form ng-submit="addComment()">
+	
+	<div class="form-group"><label class="sr-only">Comment</label><textarea class="form-control" name="name" ng-model="comment" placeholder="Comment..." required=""></textarea></div>
+
+	<input class="btn btn-primary" type="submit" value="Comment!" />
+</form>
+
+
+<ul>
+	<li ng-repeat="comment in comments">
+		
+		<div >
+			{{comment.message}}
+		</div>
+		<div>
+			{{comment.author}}
+		</div>
+		<div>
+			{{comment.createDate}}
+		</div>
+	</li>
+	<p class="empty" ng-hide="comments.length">No comments!</p>
+</ul>

@@ -33,48 +33,53 @@
 	<script src="app/scripts/userController.js"></script>
 	<script src="app/scripts/CreateItemDirective.js"></script>	
 	<script src="app/scripts/HeaderController.js"></script>
+	
+
+	<script src="app/scripts/AlertingService.js"></script>
+	<script src="app/scripts/AlertsDirective.js"></script>
+	
+
 
 </head>
-	<body ng-app="Ideas">
-		<header ng-controller="headerController">
-			<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
-							<span class="sr-only">Toggle navigation</span>
-						</button>
-						<a class="navbar-brand" href="home">Nortal Ideas</a>
-					</div>
-					
-					<div class="collapse navbar-collapse" collapse="navCollapsed">
+<body ng-app="Ideas">
+	<header ng-controller="headerController">
+		<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+						<span class="sr-only">Toggle navigation</span>
+					</button>
+					<a class="navbar-brand" href="home">Nortal Ideas</a>
+				</div>
 
-						<ul class="nav navbar-nav">
-							<li ng-class="{ active: isActive('/create')}"><a href="create">Create</a></li>		
-						</ul>
+				<div class="collapse navbar-collapse" collapse="navCollapsed">
+
+					<ul class="nav navbar-nav">
+						<li ng-class="{ active: isActive('/create')}"><a href="create">Create</a></li>
+					</ul>
 					<ul class="nav navbar-nav navbar-right" ng-controller="userController">
 
-					<li><a href="#"class="user" role="button"><div class="avatar hidden-xs"><img ng-src="data:image/jpeg;base64,{{user.thumbnail}}" width="32px" /></div> {{user.name}} </a>
-							</li>
+						<li>
+							<a href="#" class="user" role="button"><div class="avatar hidden-xs"><img ng-src="data:image/jpeg;base64,{{user.thumbnail}}" width="32px" /></div> {{user.name}} </a>
+						</li>
 
-							<li><a href="#">Log out</a>
-						</ul>
-					</div>
+						<li><a href="#">Log out</a>
+					</ul>
 				</div>
-			</nav>
-		</header>
-		<div class="content">
-			<div class="container">	
-				<div role="alert" class="alert alert-success">
-			    	<strong>Well done!</strong> You successfully read this important alert message.
-			    </div>
-			    <div role="alert" class="alert alert-danger">
-			    	<strong>Oh snap!</strong> Change a few things up and try submitting again.
-			    </div>
-				<div ng-view></div>
 			</div>
+		</nav>
+	</header>
+	<div class="content">
+		<div class="container">
+			
+			<alerts></alerts>
+
+			
+			<div ng-view></div>
 		</div>
-		<footer>
-			<div class="container">Lovingly made in <a href="http://www.nortal.com" class="logo"><img src="Content/img/nortal.png" alt="Nortal" width="60px"></a></div>
-		</footer>
-	</body>
+	</div>
+	<footer>
+		<div class="container">Lovingly made in <a href="http://www.nortal.com" class="logo"><img src="Content/img/nortal.png" alt="Nortal" width="60px"></a></div>
+	</footer>
+</body>
 </html>

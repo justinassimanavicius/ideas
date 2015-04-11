@@ -6,7 +6,8 @@
 	"vote": 5,
 	"author": "Joe Jackson",
 	"status": "Pending",
-	"comments": 5
+	"comments": 5,
+	"createDate": "2015-04-10"
 },
 {
 	"title" : "Auto-Generate Facebook-style Link Preview when inserting URL into Editor",
@@ -15,6 +16,7 @@
 	"vote": 1101,
 	"author": "Jonas Jankauskas",
 	"status": "Pending",
-	"comments": 5
+	"comments": 5,
+	"createDate": "2015-04-11"
 }
 ]

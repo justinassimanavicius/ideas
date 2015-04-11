@@ -18,10 +18,22 @@
 			});
 		}
 		
+		var vote = function(itemId, voteValue) {
+			
+		}
+
+		var getComments = function (itemId) {
+			return $http.get('app/mock/comments.js');
+		}
+
+
 		return {
 			getItems : getItems,
 			getItem: getItem,
-			saveItem: saveItem
+			saveItem: saveItem,
+			vote: vote,
+			getComments: getComments,
+			saveComment: saveComment
 		}
 	};
 

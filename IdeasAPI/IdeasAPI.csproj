@@ -201,6 +201,8 @@
   <ItemGroup>
     <Content Include="app\mock\item.js" />
     <Content Include="app\mock\items.js" />
+    <Content Include="app\scripts\AlertingService.js" />
+    <Content Include="app\scripts\AlertsDirective.js" />
     <Content Include="app\scripts\app.js" />
     <Content Include="app\scripts\CreateItemController.js" />
     <Content Include="app\scripts\CreateItemDirective.js" />
@@ -212,6 +214,7 @@
     <Content Include="app\scripts\UserController.js" />
     <Content Include="app\scripts\UserServiceMock.js" />
     <Content Include="app\scripts\UserService.js" />
+    <Content Include="app\templates\bsAlerts.html" />
     <Content Include="app\templates\createItem.html" />
     <Content Include="app\templates\home.html" />
     <Content Include="app\templates\item.html" />

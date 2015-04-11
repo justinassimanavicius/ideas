@@ -12,6 +12,8 @@
 			});
 		}
 
+
+
 	};
 
 	app.controller("createItemController", ["$scope", "itemService", "$location", createItemController]);
