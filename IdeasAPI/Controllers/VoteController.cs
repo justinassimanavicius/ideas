@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using IdeasAPI.Code;
 using IdeasAPI.Helpers;
 using IdeasAPI.Models;
 using IdeasAPI.DataContexts;
@@ -20,7 +21,8 @@ namespace IdeasAPI.Controllers
         // POST api/Vote
         [ResponseType(typeof(Vote))]
         [Route("api/entry/{id}/vote")]
-        public async Task<IHttpActionResult> PostVote(int id, bool isPositive)
+		[HttpPost]
+        public async Task<IHttpActionResult> PostVote(int id, VoteView voteView)
         {
             if (!ModelState.IsValid)
             {
@@ -40,14 +42,20 @@ namespace IdeasAPI.Controllers
                 Author = UserHelper.GetUserNameFromIdentity(User.Identity),
                 CreateDate = DateTime.Now,
                 Entry = entry,
-                IsPositive = isPositive
+                IsPositive = voteView.IsPositive
             };
 
             _db.Votes.Add(vote);
             await _db.SaveChangesAsync();
 
             var location = string.Format("api/entry/{0}", vote.Entry.Id);
-            return Created(location, vote);
+			return Created(location, new VoteView
+			{
+				Id = vote.Id,
+				Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
+				CreateDate = vote.CreateDate,
+				IsPositive = voteView.IsPositive
+			});
         }
 
         protected override void Dispose(bool disposing)

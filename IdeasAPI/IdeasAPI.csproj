@@ -195,6 +195,7 @@
     <Compile Include="Models\EntryVisibility.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Models\VoteView.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -214,7 +215,7 @@
     <Content Include="app\scripts\UserController.js" />
     <Content Include="app\scripts\UserServiceMock.js" />
     <Content Include="app\scripts\UserService.js" />
-    <Content Include="app\templates\bsAlerts.html" />
+    <Content Include="app\templates\alert.html" />
     <Content Include="app\templates\createItem.html" />
     <Content Include="app\templates\home.html" />
     <Content Include="app\templates\item.html" />
