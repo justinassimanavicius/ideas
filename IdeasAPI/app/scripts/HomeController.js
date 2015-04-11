@@ -49,7 +49,14 @@
 			console.log('Dropdown is now: ', open);
 		};
 
+		$scope.status = {
+			isopen: false
+		};
 
+
+		$scope.sortBy = function (order) {
+			$scope.sortOrder = order;
+		}
 	};
 
 	app.controller("homeController", ["$scope", "itemService", "userService", homeController]);
