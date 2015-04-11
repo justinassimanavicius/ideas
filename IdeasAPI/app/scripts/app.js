@@ -15,9 +15,14 @@
 						templateUrl: "app/templates/item.html",
 						controller: "itemController"
 					})
+					.when('/logout', { redirectTo: redirect })
 					.otherwise({ redirectTo: "/" });
 
 			}
 		]);
+
+	function redirect(skip, url) {
+		window.location.href = "/ideasapi/"+url;
+	};
    
 }());
