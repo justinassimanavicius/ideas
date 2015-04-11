@@ -204,16 +204,16 @@
 	line-height: 40px;
 	
 
-	ul {
+	> ul {
 		
 		.list-unstyled();
 		font-size: 20px;
 		margin: 0;
-		li {
+		> li {
 			float: left;
 			margin-left: 20px;
 			
-			a {
+			> a {
 				margin-bottom: -3px;
 				border-bottom: 3px solid @silver;
 				color: #333;
@@ -232,6 +232,17 @@
 
 			&.settings {
 				float: right;
+				> a {
+					color: @brand-primary;
+				}
+				
+				.dropdown-menu {
+					background-color: #FFF;
+					> li > a:focus, > li > a:hover {
+						background-color: @brand-secondary;
+						color: #FFF;
+					}
+				}
 			}
 		}
 	}
@@ -245,8 +256,8 @@ footer {
 	color: @gray;
 	font-size: 13px;
 	text-align: center;
+	padding: 10px 0;
 	.logo {
-		
 		margin-left: 2px;
 		img { vertical-align: -1px; }
 	}
@@ -259,6 +270,12 @@ footer {
 	.login-form {
 		margin-bottom: 20px;
 	}
+}
+
+// Block
+.block {
+	background-color: #FFF;
+	padding: 20px;
 }
 
 
