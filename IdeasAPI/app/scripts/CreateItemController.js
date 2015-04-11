@@ -1,5 +1,5 @@
 (function (app) {
-	var createItemController = function ($scope, itemService) {
+	var createItemController = function ($scope, itemService, $location) {
 
 		$scope.item = {};
 
@@ -8,11 +8,11 @@
 				.saveItem($scope.item)
 				.success(function() {
 
-					console.log("yay");
+					$location.path('/home');
 			});
 		}
 
 	};
 
-	app.controller("createItemController", ["$scope", "itemService", createItemController]);
+	app.controller("createItemController", ["$scope", "itemService", "$location", createItemController]);
 }(angular.module("Ideas")));

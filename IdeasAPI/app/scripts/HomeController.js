@@ -2,11 +2,13 @@
 	var homeController = function ($scope, itemService, userService) {
 
 		$scope.sortOrder = "date";
+		$scope.loadingItems = true;
 
 		itemService
 			.getItems()
-			.success(function (result) {
-                        $scope.items = result;
+			.success(function(result) {
+				$scope.items = result;
+				$scope.loadingItems = false;
 			});
 
 		userService.getUser()
