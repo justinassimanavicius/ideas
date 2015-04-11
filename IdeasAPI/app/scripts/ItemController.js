@@ -2,14 +2,15 @@
 	var itemController = function ($scope, $routeParams, itemService, alertingService) {
 		var id = $routeParams.id;
 
-		
-		
 
-		var updateItem = function() {
+		$scope.loading = true;
+
+		var updateItem = function () {
+			$scope.loading = true;
 			itemService
 				.getItem(id)
 				.success(function (result) {
-				console.log(result);
+					$scope.loading = false;
 					$scope.item = result;
 					updateComments();
 				});

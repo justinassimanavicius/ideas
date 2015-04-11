@@ -28,7 +28,7 @@ namespace IdeasAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+			 
             var entry = _db.Entries.Include("Votes").SingleOrDefault(x => x.Id == id);
 
             if (entry == null) return NotFound();
@@ -55,7 +55,7 @@ namespace IdeasAPI.Controllers
 				Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
 				CreateDate = vote.CreateDate,
 				IsPositive = voteView.IsPositive
-			});
+			}); 
         }
 
         protected override void Dispose(bool disposing)

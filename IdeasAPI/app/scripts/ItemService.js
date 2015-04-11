@@ -14,8 +14,9 @@
 		}
 
 		var vote = function (itemId, voteValue) {
-			return $http.post('api/entry/' + itemId + '/vote', voteValue);
+			return $http.post('api/entry/' + itemId + '/vote', { isPositive: voteValue });
 		}
+		
 
 		var getComments = function(itemId) {
 			return $http.get('api/entry/' + itemId + '/comment');
