@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -185,8 +184,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\js\loading-bar.js" />
-    <Content Include="app\js\ngDialog.js" />
     <Content Include="app\mock\item.js" />
     <Content Include="app\mock\items.js" />
     <Content Include="app\scripts\app.js" />
@@ -200,16 +197,13 @@
     <Content Include="app\scripts\UserController.js" />
     <Content Include="app\scripts\UserServiceMock.js" />
     <Content Include="app\scripts\UserService.js" />
-    <Content Include="app\styles\ngDialog-theme-default.css" />
-    <Content Include="app\styles\ngDialog-theme-plain.css" />
-    <Content Include="app\styles\ngDialog.css" />
-    <Content Include="app\styles\style.css" />
     <Content Include="app\templates\createItem.html" />
     <Content Include="app\templates\home.html" />
     <Content Include="app\templates\item.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\img\nortal.png" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
@@ -233,6 +227,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Content\less\main.less" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -266,9 +262,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

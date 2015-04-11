@@ -38,6 +38,18 @@
 		$scope.unaprovedFilter = function (actual, expected) {
 			return actual.status == "Pending";
 		}
+
+		$scope.toggleDropdown = function ($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.status.isopen = !$scope.status.isopen;
+		};
+
+		$scope.toggled = function (open) {
+			console.log('Dropdown is now: ', open);
+		};
+
+
 	};
 
 	app.controller("homeController", ["$scope", "itemService", "userService", homeController]);
