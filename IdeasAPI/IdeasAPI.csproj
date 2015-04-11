@@ -156,6 +156,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Code\UserContext.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -173,6 +174,10 @@
     <Compile Include="DataContexts\IdeasMigrations\201504110903152_Comments.Designer.cs">
       <DependentUpon>201504110903152_Comments.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\IdeasMigrations\201504111001596_Votes.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201504111001596_Votes.Designer.cs">
+      <DependentUpon>201504111001596_Votes.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\IdeasMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,6 +186,7 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentView.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Models\EntryPriority.cs" />
     <Compile Include="Models\EntrySource.cs" />
@@ -189,6 +195,7 @@
     <Compile Include="Models\EntryVisibility.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -894,6 +901,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdeasMigrations\201504110903152_Comments.resx">
       <DependentUpon>201504110903152_Comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdeasMigrations\201504111001596_Votes.resx">
+      <DependentUpon>201504111001596_Votes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
