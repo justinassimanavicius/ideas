@@ -8,23 +8,23 @@ namespace IdeasAPI.Models
 {
     public enum EntryStatus
     {
-        [Description("Laukia atsakymo")]
+        [Description("Open")]
         Open,
-        [Description("Sprendžiamas")]
+        [Description("In progress")]
         InProgress,
-        [Description("Laukiama analizės")]
+        [Description("Awaiting analysis")]
         AwaitingAnalysis,
-        [Description("Laukiama įgyvendinimo")]
+        [Description("Awaiting implementation")]
         AwaitingImplementation,
-        [Description("Vyksta verifikacija")]
+        [Description("Verification")]
         Verification,
-        [Description("Vyksta analizė")]
+        [Description("In analysis")]
         InAnalysis,
-        [Description("Išspręstas")]
+        [Description("Resolved")]
         Resolved,
-        [Description("Uždarytas")]
+        [Description("Closed")]
         Closed,
-        [Description("Ištrintas")]
+        [Description("Trash")]
         Trash
     }
 }

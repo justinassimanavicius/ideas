@@ -15,9 +15,12 @@ using IdeasAPI.DataContexts;
 
 namespace IdeasAPI.Controllers
 {
+    [Authorize]
     public class CommentController : ApiController
     {
         private readonly IdeasDb _db = new IdeasDb();
+
+        #region GET
 
         [HttpGet]
         [Route("api/comment")]
@@ -40,57 +43,85 @@ namespace IdeasAPI.Controllers
             return Ok(comment);
         }
 
-        // PUT api/Comment/5
-        public async Task<IHttpActionResult> PutComment(int id, Comment comment)
+        [HttpGet]
+        [Route("api/entry/{entryid}/comment")]
+        [ResponseType(typeof(List<CommentView>))]
+        public async Task<IHttpActionResult> GetEntryComments(int entryid)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var comments = await _db.Comments.Include("Entry").ToListAsync();
 
-            if (id != comment.Id)
-            {
-                return BadRequest();
-            }
+            if (comments == null) return NotFound();
 
-            _db.Entry(comment).State = EntityState.Modified;
-
-            try
+            return Ok(comments.Where(x => x.Entry.Id == entryid).Select(x => new CommentView
             {
-                await _db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CommentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+                Id = x.Id,
+                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
+                CreateDate = x.CreateDate,
+                UpdateDate = x.UpdateDate,
+                Message = x.Message
+            }));
         }
 
+        [HttpGet]
+        [Route("api/entry/{entryId}/comment/{commentId}")]
+        [ResponseType(typeof(CommentView))]
+        public async Task<IHttpActionResult> GetEntryComment(int entryId, int commentId)
+        {
+            var comment = await _db.Comments.Include("Entry").SingleOrDefaultAsync(x => x.Id == commentId && x.Entry.Id == entryId);
+
+            if (comment == null) return NotFound();
+
+            return Ok(new CommentView
+            {
+                Id = comment.Id,
+                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                CreateDate = comment.CreateDate,
+                UpdateDate = comment.UpdateDate,
+                Message = comment.Message
+            });
+        }
+
+        #endregion
+
+        #region POST
+
         // POST api/Comment
-        [ResponseType(typeof(Comment))]
-        public async Task<IHttpActionResult> PostComment(Comment comment)
+        [HttpPost]
+        [Route("api/entry/{entryId}/comment")]
+        [ResponseType(typeof(CommentView))]
+        public async Task<IHttpActionResult> PostComment(int entryId, Comment comment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var entry = _db.Entries.Find(entryId);
+
+            comment.CreateDate = DateTime.Now;
+            comment.Author = UserHelper.GetUserNameFromIdentity(User.Identity);
+            comment.Entry = entry;
 
             _db.Comments.Add(comment);
             await _db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.Id }, comment);
+            var location = String.Format("api/entry/{0}/comment/{1}", comment.Entry.Id, comment.Id);
+
+            return Created(location, new CommentView
+            {
+                Id = comment.Id,
+                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                CreateDate = comment.CreateDate,
+                Message = comment.Message
+            });
         }
 
+        #endregion
+
+        #region DELETE
+
         // DELETE api/Comment/5
-        [ResponseType(typeof(Comment))]
+        [ResponseType(typeof(CommentView))]
         public async Task<IHttpActionResult> DeleteComment(int id)
         {
             Comment comment = await _db.Comments.FindAsync(id);
@@ -99,11 +130,63 @@ namespace IdeasAPI.Controllers
                 return NotFound();
             }
 
+            if (comment.Author != UserContext.GetUserInformation(User.Identity).DomainName)
+            {
+                return Unauthorized();
+            }
+
             _db.Comments.Remove(comment);
             await _db.SaveChangesAsync();
 
-            return Ok(comment);
+            return Ok(new CommentView
+            {
+                Id = comment.Id,
+                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                CreateDate = comment.CreateDate,
+                Message = comment.Message,
+                UpdateDate = comment.UpdateDate
+            });
         }
+
+        #endregion
+
+        #region TODO
+
+        // PUT api/Comment/5
+        //public async Task<IHttpActionResult> PutComment(int id, Comment comment)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != comment.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _db.Entry(comment).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _db.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CommentExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

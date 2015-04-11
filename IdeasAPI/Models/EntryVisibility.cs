@@ -8,11 +8,11 @@ namespace IdeasAPI.Models
 {
     public enum EntryVisibility
     {
-        [Description("Viešas")]
+        [Description("Public")]
         Public,
-        [Description("Juodraštis")]
+        [Description("Draft")]
         Draft,
-        [Description("Paslėptas")]
+        [Description("Hidden")]
         Hidden
     }
 }
