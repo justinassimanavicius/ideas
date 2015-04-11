@@ -27,7 +27,11 @@ namespace IdeasAPI.Controllers
         [HttpPost]
         public ActionResult Login(Login model)
         {
-            if (!LoginValid(model) || model.Password == null || model.Username == null) return View(new Login{Username = model.Username});
+	        if (!LoginValid(model))
+	        {
+				ViewBag.Error = "Oops! Check your credentials and try again.";
+		        return View(new Login{Username = model.Username});
+	        }
 
             FormsAuthentication.SetAuthCookie(model.Username, false);
             return RedirectToAction("Index");
@@ -39,14 +43,21 @@ namespace IdeasAPI.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool LoginValid(Login credentials)
-        {
-            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "WEBMEDIA"))
-            {
-                // validate the credentials
-                var result = pc.ValidateCredentials(credentials.Username, credentials.Password);
-                return result;
-            }
-        }
+	    private bool LoginValid(Login credentials)
+	    {
+
+		    if (String.IsNullOrEmpty(credentials.Username) || String.IsNullOrEmpty(credentials.Password))
+		    {
+			    return false;
+		    }
+
+		    using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "WEBMEDIA"))
+		    {
+			    // validate the credentials
+			    var result = pc.ValidateCredentials(credentials.Username, credentials.Password);
+			    return result;
+		    }
+
+	    }
     }
 }

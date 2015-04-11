@@ -1,7 +1,7 @@
 (function (app) {
 	var homeController = function ($scope, itemService, userService) {
 
-		$scope.sortOrder = "date";
+		$scope.sortOrder = "createDate";
 		$scope.loadingItems = true;
 
 		itemService

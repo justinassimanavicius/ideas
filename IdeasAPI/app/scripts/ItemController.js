@@ -6,7 +6,6 @@
 		$scope.loading = true;
 
 		var updateItem = function () {
-			$scope.loading = true;
 			itemService
 				.getItem(id)
 				.success(function (result) {

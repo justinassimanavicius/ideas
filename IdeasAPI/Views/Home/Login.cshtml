@@ -13,28 +13,38 @@
     <link href="Content/css/main.css" rel="stylesheet">
 </head>
 <body class="login">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
-                <div class="login-form">
-                    @using (Html.BeginForm())
-                    {
-                        <div class="form-group">
-                            <input type="text" name="Username" id="Username" placeholder="Enter your name" value="" class="form-control login-field">
-                            <label for="Username" class="login-field-icon fui-user"></label>
-                        </div>
+	<div class="container">
+		
 
-                        <div class="form-group">
-                            <input type="password" name="Password" id="Password" placeholder="Password" value="" class="form-control login-field">
-                            <label for="Password" class="login-field-icon fui-lock"></label>
-                        </div>
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
+				<div class="login-form">
+					
+					@if (!String.IsNullOrEmpty(ViewBag.Error))
+					{
+						<div class="alert alert-danger ">
+							@ViewBag.Error
+						</div>
+					}
 
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" value="">Log in</button>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
+					@using (Html.BeginForm())
+					{
+						<div class="form-group">
+							<input type="text" name="Username" id="Username" placeholder="Enter your name" value="" class="form-control login-field">
+							<label for="Username" class="login-field-icon fui-user"></label>
+						</div>
+
+						<div class="form-group">
+							<input type="password" name="Password" id="Password" placeholder="Password" value="" class="form-control login-field">
+							<label for="Password" class="login-field-icon fui-lock"></label>
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-lg btn-block" value="">Log in</button>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
     <footer>
         <div class="container">Lovingly made in <a href="http://www.nortal.com" class="logo">
             <img src="Content/img/nortal.png" alt="Nortal" width="60px"></a></div>

@@ -8,16 +8,16 @@
 				</a>
 				 <ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li role="presentation" class="dropdown-header">Sort by</li>
-					<li class="active">
-						<a href="#" ng-click="sortBy('vote')">Popularity</a>
-					</li>
-					<li>
-						<a href="#" ng-click="sortBy('createDate')">Date</a>
-					</li>
-					<li>
-						<a href="#" ng-click="sortBy('title')">Title</a>
-					</li>
-				</ul>
+			 	<li ng-class="{active:sortOrder=='vote'}">
+			 		<a href="#" ng-click="sortBy('vote')">Popularity</a>
+			 	</li>
+			 	<li ng-class ="{active:sortOrder=='vote'}">
+			 		<a href="#" ng-click="sortBy('createDate')">Date</a>
+</li>
+		<li ng-class ="{active:sortOrder=='vote'}">
+			<a href="#" ng-click="sortBy('title')">Title</a>
+			</li>
+</ul>
 			</span>
 		</li>
 		<li><a href="#" ng-click="showAll()" ng-class="{active:selectedFilter==allFilter}">All</a></li>
@@ -37,7 +37,7 @@
 <div class="ideas">
 	<div class="idea-search"><input ng-model="search" class="form-control" placeholder="Search for ideas" /></div>
 	<ul>
-		<li ng-repeat="item in items | orderBy: sortOrder| filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">
+		<li ng-repeat="item in items | orderBy: sortOrder:true| filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">
 			<a ng-href="{{'item/'+item.id}}">
 
 				<div class="idea-rating">{{ item.vote > 999 ? '&infin;' : item.vote}}</div>
