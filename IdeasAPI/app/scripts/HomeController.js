@@ -2,11 +2,13 @@
 	var homeController = function ($scope, itemService, userService) {
 
 		$scope.sortOrder = "date";
+		$scope.loadingItems = true;
 
 		itemService
 			.getItems()
-			.success(function (result) {
-                        $scope.items = result;
+			.success(function(result) {
+				$scope.items = result;
+				$scope.loadingItems = false;
 			});
 
 		userService.getUser()
@@ -37,6 +39,25 @@
 
 		$scope.unaprovedFilter = function (actual, expected) {
 			return actual.status == "Pending";
+		}
+
+		$scope.toggleDropdown = function ($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.status.isopen = !$scope.status.isopen;
+		};
+
+		$scope.toggled = function (open) {
+			console.log('Dropdown is now: ', open);
+		};
+
+		$scope.status = {
+			isopen: false
+		};
+
+
+		$scope.sortBy = function (order) {
+			$scope.sortOrder = order;
 		}
 	};
 

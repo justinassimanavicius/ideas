@@ -2,25 +2,29 @@
 	<ul>
 		<li class="settings">
 			<span class="dropdown" dropdown on-toggle="toggled(open)">
-				<a href="#">
+				<a href="#" class="dropdown-toggle" dropdown-toggle>
 					<small><span class="fui-gear"></span></small>
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href>Popularity</a>
+						<a href="#" ng-click="sortBy('vote')">Popularity</a>
 					</li>
 					<li>
-						<a href>Date</a>
+						<a href="#" ng-click="sortBy('createDate')">Date</a>
+					</li>
+					<li>
+						<a href="#" ng-click="sortBy('title')">title</a>
 					</li>
 				</ul>
-	    	</span>
-	    </li>
+			</span>
+		</li>
 		<li><a href="#" ng-click="showAll()" ng-class="{active:selectedFilter==allFilter}">All</a></li>
 		<li><a href="#" ng-click="showMy()" ng-class="{active:selectedFilter==myFilter}">My ideas</a></li>
 		<li><a href="#" ng-show="isModerator" ng-click="showUnaproved()" ng-class="{active:selectedFilter==unaprovedFilter}">Pending</a></li>
 	</ul>
 </nav>
+
 <!-- <a href="create">Create</a>
 
 
@@ -29,17 +33,16 @@
 			<option value="date">Date</option>
 			<option value="popularity">Popularity</option>
 		</select>-->
-
 <div class="ideas">
 	<div class="idea-search"><input ng-model="search" class="form-control" placeholder="Search for ideas" /></div>
 	<ul>
-		<li ng-repeat="item in items | orderBy: sortOrder | filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">
+		<li ng-repeat="item in items | orderBy: sortOrder| filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">
 			<a ng-href="{{'item/'+item.id}}">
-				
+
 				<div class="idea-rating">{{ item.vote > 999 ? '&infin;' : item.vote}}</div>
 				<div class="idea-content">
 					<h4 class="idea-name">
-					{{item.title}}
+						{{item.title}}
 					</h4>
 					<ul class="list-inline">
 						<li class="author">{{item.status}}</li>
@@ -49,7 +52,8 @@
 				</div>
 			</a>
 		</li>
-		<p class="empty" ng-hide="(items | filter:search:strict | filter:selectedFilter).length">Nothing here!</p>
+		<p class="empty" ng-hide="(items | filter:search:strict | filter:selectedFilter).length || loadingItems">Nothing here!</p>
+		<p class="empty" ng-show="loadingItems">Loading</p>
 	</ul>
 </div>
 

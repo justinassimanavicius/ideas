@@ -11,7 +11,7 @@ namespace IdeasAPI.Controllers
     {
         public ActionResult Index()
         {
-            return File("./index.html", "text/html");
+            return File("~/index.html", "text/html");
         }
     }
 }
