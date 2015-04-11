@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using System.Web.Http.Description;
 using IdeasAPI.Code;
@@ -12,6 +13,7 @@ using IdeasAPI.DataContexts;
 
 namespace IdeasAPI.Controllers
 {
+    [Authorize]
     public class EntryController : ApiController
     {
         private readonly IdeasDb _db = new IdeasDb();
@@ -22,9 +24,11 @@ namespace IdeasAPI.Controllers
 		{
 		    List<Entry> entries = _db.Entries.Include("Votes").Include("Comments").ToList();
 
-		    if (!entries.Any()) return NotFound();
+		    if (!entries.Any(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)) return NotFound();
 
-		    List<EntryView> result = entries.Select(x => new EntryView
+            List<EntryView> result = entries
+                .Where(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)
+                .Select(x => new EntryView
 		    {
 		        Id = x.Id,
 		        Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
@@ -45,7 +49,7 @@ namespace IdeasAPI.Controllers
 		[Route("api/entry/{id}")]
 		public IHttpActionResult Get(int id)
 		{
-            var item = _db.Entries.Include("Votes").Include("Comments").SingleOrDefault(x => x.Id == id);
+            var item = _db.Entries.Include("Votes").Include("Comments").SingleOrDefault(x => x.Id == id && x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden);
 
 			if (item == null)
 			{
@@ -69,7 +73,7 @@ namespace IdeasAPI.Controllers
 			return Ok(result);
 		}
 
-        [Authorize]
+        [HttpPost]
 		[Route("api/entry")]
 		public IHttpActionResult Post(Entry entry)
 		{
@@ -81,12 +85,25 @@ namespace IdeasAPI.Controllers
                 entry.SecurityLevel = new List<UserGroup> { UserGroup.None };
                 entry.Source = EntrySource.Web;
                 entry.Status = EntryStatus.Open;
+                entry.Visibility = EntryVisibility.Public;
 
                 var item = _db.Entries.Add(entry);
                 _db.SaveChanges();
 
                 var location = String.Format("api/entry/{0}", item.Id);
-                return Created(location, entry);
+                return Created(location, new EntryView
+                {
+                    Id = entry.Id,
+                    Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Comments = 0,
+                    CreateDate = entry.CreateDate,
+                    Message = entry.Message,
+                    Status = entry.Status.GetEnumDescription(),
+                    Title = entry.Title,
+                    UpdateDate = entry.UpdateDate,
+                    Vote = 0,
+                    VoteResult = null
+                });
             }
             catch (Exception)
             {
@@ -94,42 +111,64 @@ namespace IdeasAPI.Controllers
             }
 		}
 
-        [HttpGet]
-        [Route("api/entry/{entryid}/comment")]
-        [ResponseType(typeof(List<CommentView>))]
-        public async Task<IHttpActionResult> GetEntryComments(int entryid)
+        [HttpDelete]
+        [Route("api/entry/{id}")]
+        public IHttpActionResult Delete(int id)
         {
-            var comments = await _db.Comments.Include("Entry").ToListAsync();
-
-            if (comments == null) return NotFound();
-
-            return Ok(comments.Where(x => x.Entry.Id == entryid).Select(x => new CommentView
+            try
             {
-                Id = x.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
-                CreateDate = x.CreateDate,
-                UpdateDate = x.UpdateDate,
-                Message = x.Message
-            }));
-        }
+                Entry entry = _db.Entries.Find(id);
 
-        [HttpGet]
-        [Route("api/entry/{entryId}/comment/{commentId}")]
-        [ResponseType(typeof(CommentView))]
-        public async Task<IHttpActionResult> GetEntryComment(int entryId, int commentId)
-        {
-            var comment = await _db.Comments.Include("Entry").SingleOrDefaultAsync(x => x.Id == commentId && x.Entry.Id == entryId);
+                if (entry == null)
+                {
+                    return NotFound();
+                }
 
-            if (comment == null) return NotFound();
+                if (entry.Author != UserContext.GetUserInformation(User.Identity).DomainName)
+                {
+                    return Unauthorized();
+                }
 
-            return Ok(new CommentView
+                entry.Status = EntryStatus.Trash;
+                entry.Visibility = EntryVisibility.Hidden;
+
+                _db.Entry(entry).State = EntityState.Modified;
+
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EntryExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return Ok(new EntryView
+                {
+                    Id = entry.Id,
+                    Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Comments = 0,
+                    CreateDate = entry.CreateDate,
+                    Message = entry.Message,
+                    Status = entry.Status.GetEnumDescription(),
+                    Visibility = entry.Visibility.GetEnumDescription(),
+                    Title = entry.Title,
+                    UpdateDate = entry.UpdateDate,
+                    Vote = 0,
+                    VoteResult = null
+                });
+            }
+            catch (Exception)
             {
-                Id = comment.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
-                CreateDate = comment.CreateDate,
-                UpdateDate = comment.UpdateDate,
-                Message = comment.Message
-            });
+                return NotFound();
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -139,6 +178,11 @@ namespace IdeasAPI.Controllers
                 _db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool EntryExists(int id)
+        {
+            return _db.Entries.Count(e => e.Id == id) > 0;
         }
     }
 }

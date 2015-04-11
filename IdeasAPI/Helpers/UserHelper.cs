@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.DirectoryServices;
 using System.Security.Principal;
-using System.Collections;
-using System.Drawing;
-using System.IO;
 using IdeasAPI.Models;
 
 namespace IdeasAPI.Helpers
@@ -14,7 +10,7 @@ namespace IdeasAPI.Helpers
         public static string GetUserNameFromIdentity(IIdentity id)
         {
             if (id == null) return "";
-            return id.Name.Split('\\')[1] ?? id.Name;
+            return GetUserNameFromComplexUsername(id.Name);
         }
 
         public static string GetUserNameFromComplexUsername(string domainName)
