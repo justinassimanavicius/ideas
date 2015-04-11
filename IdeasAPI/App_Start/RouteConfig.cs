@@ -9,6 +9,18 @@ namespace IdeasAPI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "Login",
+                url: "login",
+                defaults: new { controller = "Home", action = "Login" }
+            );
+
+            routes.MapRoute(
+                name: "Logout",
+                url: "logout",
+                defaults: new { controller = "Home", action = "LogOut" }
+            );
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{*pathInfo}",

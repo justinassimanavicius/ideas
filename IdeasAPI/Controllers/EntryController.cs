@@ -31,7 +31,7 @@ namespace IdeasAPI.Controllers
                 .Select(x => new EntryView
 		    {
 		        Id = x.Id,
-		        Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
+                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
 		        Title = x.Title,
 		        Message = x.Message,
 		        Vote = EntryHelper.GetVotes(x.Votes),
@@ -59,7 +59,7 @@ namespace IdeasAPI.Controllers
             var result = new EntryView
             {
                 Id = item.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(item.Author)).Name,
+                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(item.Author)).Name,
                 Title = item.Title,
                 Message = item.Message,
                 Vote = EntryHelper.GetVotes(item.Votes),
@@ -94,7 +94,7 @@ namespace IdeasAPI.Controllers
                 return Created(location, new EntryView
                 {
                     Id = entry.Id,
-                    Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
                     CreateDate = entry.CreateDate,
                     Message = entry.Message,
@@ -124,7 +124,7 @@ namespace IdeasAPI.Controllers
                     return NotFound();
                 }
 
-                if (entry.Author != UserContext.GetUserInformation(User.Identity).DomainName)
+                if (entry.Author != UserContext.GetUserInfo(User.Identity.Name).DomainName)
                 {
                     return Unauthorized();
                 }
@@ -153,7 +153,7 @@ namespace IdeasAPI.Controllers
                 return Ok(new EntryView
                 {
                     Id = entry.Id,
-                    Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
                     CreateDate = entry.CreateDate,
                     Message = entry.Message,

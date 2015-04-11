@@ -52,7 +52,7 @@ namespace IdeasAPI.Controllers
 			return Created(location, new VoteView
 			{
 				Id = vote.Id,
-				Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
+				Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
 				CreateDate = vote.CreateDate,
 				IsPositive = voteView.IsPositive
 			}); 

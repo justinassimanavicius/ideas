@@ -55,7 +55,7 @@ namespace IdeasAPI.Controllers
             return Ok(comments.Where(x => x.Entry.Id == entryid).Select(x => new CommentView
             {
                 Id = x.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
+                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
                 CreateDate = x.CreateDate,
                 UpdateDate = x.UpdateDate,
                 Message = x.Message
@@ -74,7 +74,7 @@ namespace IdeasAPI.Controllers
             return Ok(new CommentView
             {
                 Id = comment.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
                 CreateDate = comment.CreateDate,
                 UpdateDate = comment.UpdateDate,
                 Message = comment.Message
@@ -110,7 +110,7 @@ namespace IdeasAPI.Controllers
             return Created(location, new CommentView
             {
                 Id = comment.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
                 CreateDate = comment.CreateDate,
                 Message = comment.Message
             });
@@ -130,7 +130,7 @@ namespace IdeasAPI.Controllers
                 return NotFound();
             }
 
-            if (comment.Author != UserContext.GetUserInformation(User.Identity).DomainName)
+            if (comment.Author != UserContext.GetUserInfo(User.Identity.Name).DomainName)
             {
                 return Unauthorized();
             }
@@ -141,7 +141,7 @@ namespace IdeasAPI.Controllers
             return Ok(new CommentView
             {
                 Id = comment.Id,
-                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
                 CreateDate = comment.CreateDate,
                 Message = comment.Message,
                 UpdateDate = comment.UpdateDate

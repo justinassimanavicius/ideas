@@ -16,32 +16,15 @@ namespace IdeasAPI.Code
 
         #region User info
 
-        public static User GetUserInformation(IIdentity identity)
+        public static User GetUserInfo(string userName)
         {
-            return GetUserInfoFromAD(identity, null);
-        }
-
-        public static User GetUserInformationByUserName(IIdentity identity, string userName)
-        {
-            return GetUserInfoFromAD(identity, userName);
-        }
-
-        private static User GetUserInfoFromAD(IIdentity identity, string userName)
-        {
-            var key = "accountInfo_" + (userName ?? identity.Name);
+            var key = "accountInfo_" + userName;
 
             if (_cache[key] != null) return _cache[key] as User;
 
             try
             {
-                if (userName != null)
-                {
-                    UpdateCacheElement(key, UserHelper.GetUserFromADByUserName(identity, userName), 3600);
-                }
-                else
-                {
-                    UpdateCacheElement(key, UserHelper.GetCurrentUserFromAD(identity), 3600);
-                }
+                    UpdateCacheElement(key, UserHelper.GetUserFromADByUserName(userName), 3600);
             }
             catch (Exception)
             {

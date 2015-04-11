@@ -19,14 +19,9 @@ namespace IdeasAPI.Helpers
             return domainName;
         }
 
-        public static User GetCurrentUserFromAD(IIdentity id)
+        public static User GetUserFromADByUserName(string userName)
         {
-            return GetUserFromAD(id, null);
-        }
-
-        public static User GetUserFromADByUserName(IIdentity id, string userName)
-        {
-            return GetUserFromAD(id, userName);
+            return GetUserFromAD(userName);
         }
 
         /// <summary>
@@ -35,20 +30,11 @@ namespace IdeasAPI.Helpers
         /// <param name="id">current user identity</param>
         /// <param name="userName">domain username</param>
         /// <returns>User object</returns>
-        private static User GetUserFromAD(IIdentity id, string userName)
+        private static User GetUserFromAD(string userName)
         {
             var result = new User();
 
-            var winId = id as WindowsIdentity;
-
-            if (winId == null)
-            {
-                Console.WriteLine("Identity is not a windows identity");
-                return result;
-            }
-
-            userName = userName ?? winId.Name.Split('\\')[1];
-            var domain = winId.Name.Split('\\')[0];
+            var domain = "WEBMEDIA";
 
             var entry = new DirectoryEntry("LDAP://" + domain);
             var adSearcher = new DirectorySearcher(entry)
