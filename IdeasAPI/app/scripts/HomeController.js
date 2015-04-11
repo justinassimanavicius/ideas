@@ -18,19 +18,25 @@
 		$scope.selectedFilter = null;
 
 		$scope.showAll = function() {
-			$scope.selectedFilter = null;
+			$scope.selectedFilter = $scope.allFilter;
 		}
 
 		$scope.showMy = function () {
-			$scope.selectedFilter = function(actual, expected) {
-				return actual.author == $scope.userName;
-			}
+			$scope.selectedFilter = $scope.myFilter;
 		}
 
 		$scope.showUnaproved = function () {
-			$scope.selectedFilter = function (actual, expected) {
-				return actual.status == "Pending";
-			}
+			$scope.selectedFilter = $scope.unaprovedFilter;
+		}
+
+		$scope.allFilter = null;
+
+		$scope.myFilter = function (actual, expected) {
+			return actual.author == $scope.userName;
+		}
+
+		$scope.unaprovedFilter = function (actual, expected) {
+			return actual.status == "Pending";
 		}
 	};
 

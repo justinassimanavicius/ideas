@@ -16,9 +16,9 @@
 				</ul>
 	    	</span>
 	    </li>
-		<li><a href="#" ng-click="showAll()" class="active">All</a></li>
-		<li><a href="#" ng-click="showMy()">My ideas</a></li>
-		<li><a href="#" ng-show="isModerator" ng-click="showUnaproved()">Pending</a></li>
+		<li><a href="#" ng-click="showAll()" ng-class="{active:selectedFilter==allFilter}">All</a></li>
+		<li><a href="#" ng-click="showMy()" ng-class="{active:selectedFilter==myFilter}">My ideas</a></li>
+		<li><a href="#" ng-show="isModerator" ng-click="showUnaproved()" ng-class="{active:selectedFilter==unaprovedFilter}">Pending</a></li>
 	</ul>
 </nav>
 <!-- <a href="create">Create</a>
