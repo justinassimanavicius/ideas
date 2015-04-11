@@ -26,6 +26,10 @@
 			return $http.get('app/mock/comments.js');
 		}
 
+		var saveComment = function (itemId) {
+			return $http.get('app/mock/comments.js');
+		}
+
 
 		return {
 			getItems : getItems,

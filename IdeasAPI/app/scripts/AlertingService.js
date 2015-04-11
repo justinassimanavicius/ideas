@@ -14,7 +14,8 @@
             addAlert(alert);
         };
 
-        var addAlert = function(alert) {
+        var addAlert = function (alert) {
+	        console.log(alert);
         	currentAlerts.unshift(alert);
             $timeout(function() {
                 for (var i = 0; i < currentAlerts.length; i++) {

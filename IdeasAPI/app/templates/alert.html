@@ -1,9 +1,9 @@
-<div ng-show="currentAlerts.length > 0" class="my-element">
+<div ng-show="currentAlerts.length > 0" >
 
 	<div role="alert" class="alert alert-success" ng-show="isOfType('success')">
 		<strong>Well done!</strong> You successfully read this important alert message.
 	</div>
-	<div role="alert" class="alert alert-danger" ng-show="false">
+	<div role="alert" class="alert alert-danger" ng-show="isOfType('danger')">
 		<strong>Oh snap!</strong> Change a few things up and try submitting again.
 	</div>
 

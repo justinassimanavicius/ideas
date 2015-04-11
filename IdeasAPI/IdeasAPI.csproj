@@ -214,6 +214,7 @@
     <Content Include="app\scripts\ItemController.js" />
     <Content Include="app\scripts\ItemMockService.js" />
     <Content Include="app\scripts\ItemService.js" />
+    <Content Include="app\scripts\RequestInterceptor.js" />
     <Content Include="app\scripts\UserController.js" />
     <Content Include="app\scripts\UserServiceMock.js" />
     <Content Include="app\scripts\UserService.js" />
