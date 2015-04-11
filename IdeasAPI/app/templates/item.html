@@ -1,18 +1,19 @@
-<h2>{{item.message}}</h2>
+<h2>{{item.title}}</h2>
 
-<div class="row" ng-show="item.assignee">
-	<span class="col-xs-6">Assignee</span>
-	<span class="col-xs-6">{{item.assignee.username}}</span>
+<div class="row" ng-show="item.message">
+	<span class="col-xs-6">Message</span>
+	<span class="col-xs-6">{{item.message}}</span>
 </div>
+
 
 <div class="row">
 	<span class="col-xs-6">Author</span>
-	<span class="col-xs-6">{{item.author.username}}</span>
+	<span class="col-xs-6">{{item.author}}</span>
 </div>
 
 <div class="row" ng-show>
-	<span class="col-xs-6">CreateDate</span>
-	<span class="col-xs-6">{{item.createDate}}</span>
+	<span class="col-xs-6">Vote</span>
+	<span class="col-xs-6">{{item.vote}}</span>
 </div>
 
 <div class="row" ng-show>
@@ -21,11 +22,6 @@
 </div>
 
 <div class="row" ng-show>
-	<span class="col-xs-6">Visibility</span>
-	<span class="col-xs-6">{{item.visibility}}</span>
-</div>
-
-<div class="row" ng-show>
-	<span class="col-xs-6">Source</span>
-	<span class="col-xs-6">{{item.source}}</span>
+	<span class="col-xs-6">Comments</span>
+	<span class="col-xs-6">{{item.comments}}</span>
 </div>
