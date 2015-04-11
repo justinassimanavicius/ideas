@@ -1,10 +1,10 @@
 <div ng-show="loading">Loading</div>
 
 <div ng-show="item.id">
-	<h2>{{item.title}}</h2>
+	<h2>{{item.title}} </h2>
 
-	<button class="btn" ng-click="upvote()">+</button>
-	<button class="btn" ng-click="downvote()">-</button>
+	<span ng-class="{'btn-primary':item.voteResult==true}" class="btn btn-default fui-check" ng-click="upvote()"></span>
+	<span ng-class="{'btn-danger':item.voteResult==false}" class="btn  btn-default fui-cross" ng-click="downvote()"></span>
 
 	<div class="row">
 		<span class="col-xs-6">Message</span>

@@ -50,11 +50,14 @@
 		}
 
 		function vote(value) {
-			itemService
-				.vote($scope.item.id, value)
-				.success(function () {
-					updateItem();
-				});
+
+			if ($scope.item.voteResult !== undefined) {
+				itemService
+					.vote($scope.item.id, value)
+					.success(function() {
+						updateItem();
+					});
+			}
 		}
 
 		updateItem();
