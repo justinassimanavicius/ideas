@@ -169,15 +169,23 @@
     <Compile Include="DataContexts\IdeasMigrations\201504101641207_Entry_title.Designer.cs">
       <DependentUpon>201504101641207_Entry_title.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\IdeasMigrations\201504110903152_Comments.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201504110903152_Comments.Designer.cs">
+      <DependentUpon>201504110903152_Comments.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\IdeasMigrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EntryHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Models\EntryPriority.cs" />
     <Compile Include="Models\EntrySource.cs" />
     <Compile Include="Models\EntryStatus.cs" />
+    <Compile Include="Models\EntryView.cs" />
     <Compile Include="Models\EntryVisibility.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserGroup.cs" />
@@ -259,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdeasMigrations\201504101641207_Entry_title.resx">
       <DependentUpon>201504101641207_Entry_title.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdeasMigrations\201504110903152_Comments.resx">
+      <DependentUpon>201504110903152_Comments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

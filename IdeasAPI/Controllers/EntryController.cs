@@ -1,4 +1,5 @@
-﻿using IdeasAPI.Helpers;
+﻿using IdeasAPI.Code;
+using IdeasAPI.Helpers;
 using IdeasAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,22 @@ namespace IdeasAPI.Controllers
 		[Route("api/entry")]
 		public IHttpActionResult Get()
 		{
-			return Ok(_db.Entries.ToList());
+		    List<Entry> entries = _db.Entries.ToList();
+
+		    if (!entries.Any()) return NotFound();
+
+		    List<EntryView> result = entries.Select(x => new EntryView
+		    {
+		        Id = x.Id,
+		        Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
+		        Title = x.Title,
+		        Message = x.Message,
+		        Vote = EntryHelper.GetVotes(x.Upvoters, x.Downvoters),
+                Comments = x.Comments != null ? x.Comments.Count : 0,
+		        Status = x.Status.GetEnumDescription()
+		    }).ToList();
+
+		    return Ok(result);
 		}
 
 		[HttpGet]
@@ -30,7 +46,18 @@ namespace IdeasAPI.Controllers
 				return NotFound();
 			}
 
-			return Ok(item);
+            var result = new EntryView
+            {
+                Id = item.Id,
+                Author = UserContext.GetUserInformationByUserName(User.Identity, UserHelper.GetUserNameFromComplexUsername(item.Author)).Name,
+                Title = item.Title,
+                Message = item.Message,
+                Vote = EntryHelper.GetVotes(item.Upvoters, item.Downvoters),
+                Comments = item.Comments != null ? item.Comments.Count : 0,
+                Status = item.Status.GetEnumDescription()
+            };
+
+			return Ok(result);
 		}
 
         [Authorize]

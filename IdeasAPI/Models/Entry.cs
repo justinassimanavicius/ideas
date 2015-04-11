@@ -24,5 +24,6 @@ namespace IdeasAPI.Models
         public List<UserGroup> SecurityLevel { get; set; }
         public EntryVisibility Visibility { get; set; }
         public EntryPriority Priority { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

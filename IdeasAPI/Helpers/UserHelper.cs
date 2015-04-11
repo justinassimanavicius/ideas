@@ -17,6 +17,12 @@ namespace IdeasAPI.Helpers
             return id.Name.Split('\\')[1] ?? id.Name;
         }
 
+        public static string GetUserNameFromComplexUsername(string domainName)
+        {
+            if (domainName.Split('\\').Length > 1) return domainName.Split('\\')[1];
+            return domainName;
+        }
+
         public static User GetCurrentUserFromAD(IIdentity id)
         {
             return GetUserFromAD(id, null);
