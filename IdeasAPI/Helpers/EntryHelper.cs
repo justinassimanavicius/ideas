@@ -11,7 +11,7 @@ namespace IdeasAPI.Helpers
     {
         public static int GetVotes(List<Vote> votes)
         {
-            return votes != null ? votes.Count : 0;
+            return votes != null ? votes.Count(x => x.IsPositive) - votes.Count(x => !x.IsPositive) : 0;
         }
 
         public static bool? UserVoteResult(IIdentity id, List<Vote> votes)
