@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -35,7 +32,7 @@ namespace IdeasAPI.Controllers
 
             var userVoteResult = EntryHelper.UserVoteResult(User.Identity, entry.Votes);
 
-            if (userVoteResult != null) return Unauthorized();
+            if (userVoteResult != null) return BadRequest();
 
             var vote = new Vote
             {

@@ -132,7 +132,7 @@ namespace IdeasAPI.Controllers
 
             if (comment.Author != UserContext.GetUserInfo(User.Identity.Name).DomainName)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             _db.Comments.Remove(comment);

@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices.AccountManagement;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
-using System.Security.Principal;
-using System.Web.Security;
+using Ideas.BusinessLogic.Configurations;
+using Ideas.BusinessLogic.Services.ConfigurationLoaderService;
 using IdeasAPI.Code;
-using IdeasAPI.Helpers;
-using IdeasAPI.Models;
 
 namespace IdeasAPI.Controllers
 {
     public class UserController : ApiController
     {
+        private readonly IdeasGlobalSettings _config;
+
+        public UserController(IConfigurationLoaderService configurationLoaderService)
+        {
+            _config = configurationLoaderService.LoadConfig<IdeasGlobalSettings>();
+        }
+
         [Authorize]
         public IHttpActionResult Get()
         {
@@ -26,8 +26,7 @@ namespace IdeasAPI.Controllers
                 return NotFound();
             }
 
-            //TODO: Remove hardcode
-            user.IsModerator = true;
+            user.IsModerator = _config.ModeratorCollection.Cast<ModeratorElement>().ToList().Any(x => x.Username == user.DomainName);
 
 	        return Ok(user);
         }
@@ -45,8 +44,7 @@ namespace IdeasAPI.Controllers
                 return NotFound();
             }
 
-            //TODO: Remove hardcode
-            user.IsModerator = true;
+            user.IsModerator = _config.ModeratorCollection.Cast<ModeratorElement>().ToList().Any(x => x.Username == user.DomainName);
 
             return Ok(user);
         }

@@ -126,7 +126,7 @@ namespace IdeasAPI.Controllers
 
                 if (entry.Author != UserContext.GetUserInfo(User.Identity.Name).DomainName)
                 {
-                    return Unauthorized();
+                    return BadRequest();
                 }
 
                 entry.Status = EntryStatus.Trash;
