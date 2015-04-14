@@ -1,18 +1,41 @@
 <div ng-show="loading">Loading</div>
 
 <div ng-show="item.id">
-	<h2>{{item.title}} </h2>
-
-	<span ng-class="{'btn-primary':item.voteResult==true}" class="btn btn-default fui-check" ng-click="upvote()"></span>
-	<span ng-class="{'btn-danger':item.voteResult==false}" class="btn  btn-default fui-cross" ng-click="downvote()"></span>
-
-	<div class="row">
-		<span class="col-xs-6">Message</span>
-		<span class="col-xs-6">{{item.message}}</span>
-	</div>
-
-
-	<div class="row">
+    <h2>{{item.title}} </h2>
+    <span ng-class="{'btn-primary':item.voteResult==true}" class="btn btn-default thumbs-up" ng-click="upvote()"></span>
+    <span ng-class="{'btn-danger':item.voteResult==false}" class="btn  btn-default thumbs-down" ng-click="downvote()"></span>
+<div style="break-after: always;"></div>
+    <div class="row" ng-if="item.message != null">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>Idea description:</dt>
+                <dd>{{item.message}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <dl class="dl-horizontal">
+                <dt>Created by:</dt>
+                <dd>{{item.author}}</dd>
+                <dt>Votes:</dt>
+                <dd>{{item.vote}}</dd>
+                <dt>Comments:</dt>
+                <dd>{{item.comments}}</dd>
+            </dl>
+        </div>
+        <div class="col-lg-7" id="cluster_info">
+            <dl class="dl-horizontal">
+                <dt>Status:</dt>
+                <dd><span class="label label-primary">{{item.status}}</span></dd>
+                <dt>Created:</dt>
+                <dd>{{item.createDate}}</dd>
+                <dt>Last update:</dt>
+                <dd>{{item.updateDate}}</dd>
+            </dl>
+        </div>
+    </div>
+    <!--<div class="row">
 		<span class="col-xs-6">Author</span>
 		<span class="col-xs-6">{{item.author}}</span>
 	</div>
@@ -35,30 +58,32 @@
 	<div class="row">
 		<span class="col-xs-6">Create Date</span>
 		<span class="col-xs-6">{{item.createDate}}</span>
-	</div>
+	</div>-->
 
 
-	<form ng-submit="addComment()">
+    <form ng-submit="addComment()">
 
-		<div class="form-group"><label class="sr-only">Comment</label><textarea class="form-control" name="name" ng-model="comment" placeholder="Comment..." required=""></textarea></div>
+        <div class="form-group">
+            <label class="sr-only">Comment</label><textarea class="form-control" name="name" ng-model="comment" placeholder="Comment..." required=""></textarea>
+        </div>
 
-		<input class="btn btn-primary" type="submit" value="Comment!" />
-	</form>
+        <input class="btn btn-primary" type="submit" value="Comment!" />
+    </form>
 
 
-	<ul>
-		<li ng-repeat="comment in comments">
+    <ul>
+        <li ng-repeat="comment in comments">
 
-			<div>
-				{{comment.message}}
-			</div>
-			<div>
-				{{comment.author}}
-			</div>
-			<div>
-				{{comment.createDate}}
-			</div>
-		</li>
-		<p class="empty" ng-hide="comments.length">No comments!</p>
-	</ul>
+            <div>
+                {{comment.message}}
+            </div>
+            <div>
+                {{comment.author}}
+            </div>
+            <div>
+                {{comment.createDate}}
+            </div>
+        </li>
+        <p class="empty" ng-hide="comments.length">No comments!</p>
+    </ul>
 </div>
