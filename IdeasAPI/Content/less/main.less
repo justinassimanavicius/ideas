@@ -12,7 +12,7 @@
 // Reset and dependencies
 @import "@{boot}normalize";
 // @import "@{boot}print";
-@import "@{boot}glyphicons";
+//@import "@{boot}glyphicons";
 
 // Core CSS
 @import "@{boot}scaffolding";
@@ -88,7 +88,7 @@
 //@import "@{flat}modules/pager";
 //@import "@{flat}modules/pagination";
 //@import "@{flat}modules/tooltip";
-@import "@{flat}modules/dropdowns";
+//@import "@{flat}modules/dropdowns";
 // @import "@{flat}modules/select";
 // @import "@{flat}modules/tiles";
 @import "@{flat}modules/navbar";
@@ -176,6 +176,9 @@
 		    		margin: 1px 0 3px;
 		    		color: @brand-primary;
 				}
+				.idea-name {
+					color: #237a91;
+				}
 				.idea-content {
 					margin-left: 80px;
 				}
@@ -196,8 +199,7 @@
 	padding: 20px;
 	text-align: center;
 }
-/* =subnav
------------------------------------------------------------------------------ */
+// Subnav
 #subnav {
 	.clearfix;
 	border-bottom: 3px solid @silver;
@@ -213,7 +215,7 @@
 			float: left;
 			margin-left: 20px;
 			
-			> a {
+			a {
 				margin-bottom: -3px;
 				border-bottom: 3px solid @silver;
 				color: #333;
@@ -237,19 +239,64 @@
 				}
 				
 				.dropdown-menu {
+					a {
+						border: 0 none;
+						font-size: 16px;
+					}
 					background-color: #FFF;
 					> li > a:focus, > li > a:hover {
 						background-color: @brand-secondary;
 						color: #FFF;
+					}
+					> .active > a {
+						background-color: #f5f5f5;
+						font-weight: bold;
 					}
 				}
 			}
 		}
 	}
 }
+// Item
+.item-meta {
+	margin-bottom: 20px;
+}
 
-
-
+// Votes
+.vote-container {
+	display: table;
+	width: 100%;
+	margin-bottom: 20px;
+	.vote {
+		display: table-cell;
+		width: 1%;
+		text-align: center;
+		background-color: @brand-primary;
+		color: #FFF;
+		&.vote-up {
+			a {
+				background-color: @brand-secondary;
+				&:hover, &:focus {
+					background-color: lighten(@brand-secondary, 5%);
+				}
+			}	
+		}
+		&.vote-down {
+			a {
+				background-color: @alizarin;
+				&:hover, &:focus {
+					background-color: lighten(@alizarin, 5%);
+				}
+			}	
+		}
+		a {
+			width: 100%;
+			display: block;
+			padding: 10px;
+			color: #FFF;
+		}
+	}
+}
 
 // Footer
 footer {

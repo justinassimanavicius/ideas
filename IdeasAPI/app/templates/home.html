@@ -11,10 +11,10 @@
 			 	<li ng-class="{active:sortOrder=='vote'}">
 			 		<a href="#" ng-click="sortBy('vote')">Popularity</a>
 			 	</li>
-			 	<li ng-class ="{active:sortOrder=='vote'}">
+			 	<li ng-class ="{active:sortOrder=='createDate'}">
 			 		<a href="#" ng-click="sortBy('createDate')">Date</a>
 </li>
-		<li ng-class ="{active:sortOrder=='vote'}">
+		<li ng-class ="{active:sortOrder=='title'}">
 			<a href="#" ng-click="sortBy('title')">Title</a>
 			</li>
 </ul>
@@ -26,14 +26,7 @@
 	</ul>
 </nav>
 
-<!-- <a href="create">Create</a>
 
-
-
-		<select ng-model="sortOrder" class="form-control">
-			<option value="date">Date</option>
-			<option value="popularity">Popularity</option>
-		</select>-->
 <div class="ideas">
 	<div class="idea-search"><input ng-model="search" class="form-control" placeholder="Search for ideas" /></div>
 	<ul>

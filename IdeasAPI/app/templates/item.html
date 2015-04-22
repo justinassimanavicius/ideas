@@ -1,65 +1,37 @@
 <div ng-show="loading">Loading</div>
 
 <div ng-show="item.id">
-    <h2>{{item.title}} </h2>
-    <span ng-class="{'btn-primary':item.voteResult==true}" class="btn btn-default thumbs-up" ng-click="upvote()"></span>
-    <span ng-class="{'btn-danger':item.voteResult==false}" class="btn  btn-default thumbs-down" ng-click="downvote()"></span>
-<div style="break-after: always;"></div>
-    <div class="row" ng-if="item.message != null">
-        <div>
-            <dl class="dl-horizontal">
-                <dt>Idea description:</dt>
-                <dd>{{item.message}}</dd>
-            </dl>
-        </div>
+    <h2>{{item.title}}</h2>
+    <ul class="list-inline item-meta">
+        <li>{{item.status}}</li>
+        <li><span class="fui-user"></span> {{item.author}}</li>
+        <li><span class="fui-bubble"></span> {{item.comments}}</li>
+    </ul>
+    <div class="block" ng-if="item.message != null">
+        {{item.message}}
+
     </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <dl class="dl-horizontal">
-                <dt>Created by:</dt>
-                <dd>{{item.author}}</dd>
-                <dt>Votes:</dt>
-                <dd>{{item.vote}}</dd>
-                <dt>Comments:</dt>
-                <dd>{{item.comments}}</dd>
-            </dl>
-        </div>
+    <div class="vote-container">
+        <div class="vote vote-up"><a href ng-class="{'btn-primary':item.voteResult==true}" class="thumbs-up" ng-click="upvote()">&uarr;</a></div>
+        <div class="vote vote-count">{{item.vote}} </div>
+        <div class="vote vote-down"><a href ng-class="{'btn-danger':item.voteResult==false}" class="thumbs-down" ng-click="downvote()">&darr;</a></div>
+    </div>
+    
+    
+
+    <!-- <div class="row">
+        
         <div class="col-lg-7" id="cluster_info">
             <dl class="dl-horizontal">
-                <dt>Status:</dt>
-                <dd><span class="label label-primary">{{item.status}}</span></dd>
+                
                 <dt>Created:</dt>
                 <dd>{{item.createDate}}</dd>
                 <dt>Last update:</dt>
                 <dd>{{item.updateDate}}</dd>
             </dl>
         </div>
-    </div>
-    <!--<div class="row">
-		<span class="col-xs-6">Author</span>
-		<span class="col-xs-6">{{item.author}}</span>
-	</div>
-
-	<div class="row">
-		<span class="col-xs-6">Vote</span>
-		<span class="col-xs-6">{{item.vote}}</span>
-	</div>
-
-	<div class="row">
-		<span class="col-xs-6">Status</span>
-		<span class="col-xs-6">{{item.status}}</span>
-	</div>
-
-	<div class="row">
-		<span class="col-xs-6">Comments</span>
-		<span class="col-xs-6">{{item.comments}}</span>
-	</div>
-
-	<div class="row">
-		<span class="col-xs-6">Create Date</span>
-		<span class="col-xs-6">{{item.createDate}}</span>
-	</div>-->
-
+    </div> -->
+    
 
     <form ng-submit="addComment()">
 
