@@ -27,7 +27,7 @@
 </nav>
 
 
-<div class="ideas">
+<div class="slats">
 	<div class="idea-search"><input ng-model="search" class="form-control" placeholder="Search for ideas" /></div>
 	<ul>
 		<li ng-repeat="item in items | orderBy: sortOrder:true| filter:search:strict | filter:selectedFilter" id="idea-{{item.id}}">

@@ -6295,47 +6295,58 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
 .content {
   padding-bottom: 20px;
 }
-.ideas {
+.slats {
   background-color: #FFF;
 }
-.ideas .idea-search {
+.slats .idea-search {
   background-color: #e6e9ea;
   padding: 10px 20px;
 }
-.ideas > ul {
+.slats.comments {
+  margin-top: 20px;
+}
+.slats > ul {
   padding-left: 0;
   list-style: none;
 }
-.ideas > ul > li {
+.slats > ul > li {
   font-size: 14px;
   line-height: 1.214;
   border-top: 1px solid #ecf0f1;
 }
-.ideas > ul > li:first-child {
+.slats > ul > li:first-child {
   border-top: 0 none;
 }
-.ideas > ul > li a {
+.slats > ul > li .slats-content {
+  padding: 10px;
+  color: #95a5a6;
+}
+.slats > ul > li .slats-content .comment {
+  font-size: 15px;
+  color: #001223;
+}
+.slats > ul > li a {
   display: block;
   cursor: pointer;
   color: #95a5a6;
   padding: 10px;
 }
-.ideas > ul > li a:hover,
-.ideas > ul > li a:focus {
+.slats > ul > li a:hover,
+.slats > ul > li a:focus {
   border-left: 5px solid #26a948;
 }
-.ideas > ul > li a h4 {
+.slats > ul > li a h4 {
   font-size: 17px;
   margin: 1px 0 3px;
   color: #001223;
 }
-.ideas > ul > li a .idea-name {
+.slats > ul > li a .idea-name {
   color: #237a91;
 }
-.ideas > ul > li a .idea-content {
+.slats > ul > li a .idea-content {
   margin-left: 80px;
 }
-.ideas > ul > li a .idea-rating {
+.slats > ul > li a .idea-rating {
   font-size: 35px;
   float: left;
   width: 70px;
@@ -6429,8 +6440,14 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   background-color: #f5f5f5;
   font-weight: bold;
 }
+.title {
+  font-size: 35px;
+  margin-top: 0;
+}
 .item-meta {
   margin-bottom: 20px;
+  font-size: 14px;
+  color: #7f8c8d;
 }
 .vote-container {
   display: table;

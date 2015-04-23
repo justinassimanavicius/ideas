@@ -1,61 +1,46 @@
 <div ng-show="loading">Loading</div>
 
 <div ng-show="item.id">
-    <h2>{{item.title}}</h2>
+    <h2 class="title">{{item.title}}</h2>
     <ul class="list-inline item-meta">
         <li>{{item.status}}</li>
         <li><span class="fui-user"></span> {{item.author}}</li>
         <li><span class="fui-bubble"></span> {{item.comments}}</li>
+        <li><span class="fui-calendar"></span> {{item.createDate}} <span ng-if="item.updateDate != null">(Last update: {{item.updateDate}})</span></span> 
     </ul>
     <div class="block" ng-if="item.message != null">
         {{item.message}}
-
     </div>
     <div class="vote-container">
-        <div class="vote vote-up"><a href ng-class="{'btn-primary':item.voteResult==true}" class="thumbs-up" ng-click="upvote()">&uarr;</a></div>
-        <div class="vote vote-count">{{item.vote}} </div>
-        <div class="vote vote-down"><a href ng-class="{'btn-danger':item.voteResult==false}" class="thumbs-down" ng-click="downvote()">&darr;</a></div>
+        <div class="vote vote-up"><a href ng-class="{'btn-primary':item.voteResult==true}" class="thumbs-up" ng-click="upvote()"><span aria-hidden="true" class="glyphicon glyphicon-hand-right"></span> Like</a></div>
+        <div class="vote vote-count">{{item.vote}} votes</div>
+        <div class="vote vote-down"><a href ng-class="{'btn-danger':item.voteResult==false}" class="thumbs-down" ng-click="downvote()"><span aria-hidden="true" class="glyphicon glyphicon-hand-down"></span> Dislike</a></div>
     </div>
     
-    
+    <div class="block">
+        <form ng-submit="addComment()">
 
-    <!-- <div class="row">
-        
-        <div class="col-lg-7" id="cluster_info">
-            <dl class="dl-horizontal">
-                
-                <dt>Created:</dt>
-                <dd>{{item.createDate}}</dd>
-                <dt>Last update:</dt>
-                <dd>{{item.updateDate}}</dd>
-            </dl>
-        </div>
-    </div> -->
-    
-
-    <form ng-submit="addComment()">
-
-        <div class="form-group">
-            <label class="sr-only">Comment</label><textarea class="form-control" name="name" ng-model="comment" placeholder="Comment..." required=""></textarea>
-        </div>
-
-        <input class="btn btn-primary" type="submit" value="Comment!" />
-    </form>
-
-
-    <ul>
-        <li ng-repeat="comment in comments">
-
-            <div>
-                {{comment.message}}
+            <div class="form-group">
+                <label class="sr-only">Comment</label><textarea class="form-control" name="name" ng-model="comment" placeholder="Comment..." required=""></textarea>
             </div>
-            <div>
-                {{comment.author}}
-            </div>
-            <div>
-                {{comment.createDate}}
-            </div>
-        </li>
-        <p class="empty" ng-hide="comments.length">No comments!</p>
-    </ul>
+
+            <input class="btn btn-primary" type="submit" value="Comment!" />
+        </form>
+    </div>
+    <div class="slats comments">
+        <ul>
+            <li ng-repeat="comment in comments">
+                <div class="slats-content">
+                    <div class="comment">
+                        {{comment.message}}
+                    </div>
+                    <ul class="list-inline">
+                        <li class="author"><span class="fui-user"></span> {{comment.author}}</li>
+                        <li class="date"><span class="fui-calendar"></span> {{comment.createDate}}</li>
+                    </ul>
+                </div>
+            </li>
+            <p class="empty" ng-hide="comments.length">No comments!</p>
+        </ul>
+    </div>
 </div>

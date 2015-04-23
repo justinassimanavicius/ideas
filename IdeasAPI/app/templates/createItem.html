@@ -1,12 +1,12 @@
 ﻿<div class="container">
+	<h2 class="title">Spread your idea</h2>
 	<div class="block">
 		<form ng-submit="saveItem()">
 			<div class="form-group"><label class="sr-only">Title</label><input class="form-control" name="name" ng-model="item.title" placeholder="Title..." required=""/></div>
 			
-			<div class="form-group"><label class="sr-only">Idea</label><textarea class="form-control" name="name" ng-model="item.message" placeholder="Spread your idea..."></textarea></div>
+			<div class="form-group"><label class="sr-only">Idea</label><textarea class="form-control" rows="10" name="name" ng-model="item.message" placeholder="The idea in details..."></textarea></div>
 
 			<input class="btn btn-primary" type="submit" value="Share!" />
 		</form>
 	</div>
-
 </div>

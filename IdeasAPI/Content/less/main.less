@@ -12,7 +12,7 @@
 // Reset and dependencies
 @import "@{boot}normalize";
 // @import "@{boot}print";
-//@import "@{boot}glyphicons";
+// @import "@{boot}glyphicons";
 
 // Core CSS
 @import "@{boot}scaffolding";
@@ -144,11 +144,14 @@
 	padding-bottom: 20px;
 }
 
-.ideas {
+.slats {
 	background-color: #FFF;
 	.idea-search {
 		background-color: lighten(@silver, 15%);
 		padding: 10px 20px;
+	}
+	&.comments {
+		margin-top: 20px;
 	}
 	> ul {
 		.list-unstyled();
@@ -158,6 +161,14 @@
 			border-top: 1px solid @clouds;
 			&:first-child {
 				border-top: 0 none;
+			}
+			.slats-content {
+				padding: 10px;
+				color: @concrete;
+				.comment {
+					font-size: 15px;
+					color: @brand-primary;
+				}
 			}
 			a {
 				display: block;
@@ -258,8 +269,14 @@
 	}
 }
 // Item
+.title {
+	font-size: 35px;
+	margin-top: 0;
+}
 .item-meta {
 	margin-bottom: 20px;
+	font-size: 14px;
+	color: @asbestos;
 }
 
 // Votes
