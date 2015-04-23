@@ -6468,12 +6468,18 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
 .vote-container .vote.vote-up a:focus {
   background-color: #2bbe51;
 }
+.vote-container .vote.vote-up a.disabled {
+  background-color: #93d4a4;
+}
 .vote-container .vote.vote-down a {
   background-color: #e74c3c;
 }
 .vote-container .vote.vote-down a:hover,
 .vote-container .vote.vote-down a:focus {
   background-color: #ea6153;
+}
+.vote-container .vote.vote-down a.disabled {
+  background-color: #f3a69e;
 }
 .vote-container .vote a {
   width: 100%;

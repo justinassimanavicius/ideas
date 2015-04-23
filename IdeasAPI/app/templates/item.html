@@ -12,9 +12,9 @@
         {{item.message}}
     </div>
     <div class="vote-container">
-        <div class="vote vote-up"><a href ng-class="{'btn-primary':item.voteResult==true}" class="thumbs-up" ng-click="upvote()"><span aria-hidden="true" class="glyphicon glyphicon-hand-right"></span> Like</a></div>
+        <div class="vote vote-up"><a href ng-class="{'disabled':item.voteResult==true}" class="thumbs-up" ng-click="upvote()"><span aria-hidden="true" class="glyphicon glyphicon-hand-right"></span> Like</a></div>
         <div class="vote vote-count">{{item.vote}} votes</div>
-        <div class="vote vote-down"><a href ng-class="{'btn-danger':item.voteResult==false}" class="thumbs-down" ng-click="downvote()"><span aria-hidden="true" class="glyphicon glyphicon-hand-down"></span> Dislike</a></div>
+        <div class="vote vote-down"><a href ng-class="{'disabled':item.voteResult==false}" class="thumbs-down" ng-click="downvote()"><span aria-hidden="true" class="glyphicon glyphicon-hand-down"></span> Dislike</a></div>
     </div>
     
     <div class="block">

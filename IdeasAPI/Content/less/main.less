@@ -296,6 +296,9 @@
 				&:hover, &:focus {
 					background-color: lighten(@brand-secondary, 5%);
 				}
+				&.disabled {
+					background-color: mix(@brand-secondary, #FFF, 50%)
+				}
 			}	
 		}
 		&.vote-down {
@@ -303,6 +306,9 @@
 				background-color: @alizarin;
 				&:hover, &:focus {
 					background-color: lighten(@alizarin, 5%);
+				}
+				&.disabled {
+					background-color: mix(@alizarin, #FFF, 50%)
 				}
 			}	
 		}
