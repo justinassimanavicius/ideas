@@ -1,8 +1,10 @@
 <div ng-show="loading">Loading</div>
 
 <div ng-show="item.id">
-    <h2 class="title">{{item.title}}</h2>
-    <ul class="list-inline item-meta">
+	<h2 class="title">{{item.title}}</h2>
+	<a class="fui-cross bg-danger text-danger" href="#" ng-click="deleteItem()" ng-show="canDelete"></a>
+	<a class="fui-check bg-success text-success" href="#" ng-click="aproveItem()" ng-show="canAprove"></a>
+	<ul class="list-inline item-meta">
         <li>{{item.status}}</li>
         <li><span class="fui-user"></span> {{item.author}}</li>
         <li><span class="fui-bubble"></span> {{item.comments}}</li>

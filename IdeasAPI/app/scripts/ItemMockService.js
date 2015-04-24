@@ -18,7 +18,7 @@
 			});
 		}
 		
-		var vote = function(itemId, voteValue) {
+		var noop = function() {
 			
 		}
 
@@ -35,9 +35,11 @@
 			getItems : getItems,
 			getItem: getItem,
 			saveItem: saveItem,
-			vote: vote,
+			vote: noop,
 			getComments: getComments,
-			saveComment: saveComment
+			saveComment: saveComment,
+			deleteItem: noop,
+			aproveItem: noop
 		}
 	};
 

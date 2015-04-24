@@ -1,5 +1,5 @@
 (function (app) {
-	var itemController = function ($scope, $routeParams, itemService, alertingService) {
+	var itemController = function ($scope, $routeParams, itemService, alertingService, $location, userService) {
 		var id = $routeParams.id;
 
 
@@ -11,6 +11,14 @@
 				.success(function (result) {
 					$scope.loading = false;
 					$scope.item = result;
+					userService.getUser()
+					.then(function(user) {
+						//$scope.isModerator = user.isModerator;
+						$scope.userName = user.name;
+						$scope.canDelete = result.author == user.name;
+						$scope.canAprove = user.isModerator && result.status == "Awaiting analysis";
+					});
+					
 					updateComments();
 				});
 		}
@@ -33,6 +41,30 @@
 			vote(false);
 		}
 
+
+		$scope.deleteItem = function () {
+			itemService
+			.deleteItem($scope.item.id)
+			.success(function () {
+				$location.path('/home');
+			}).error(function () {
+				alertingService.addDanger(true);
+
+			});
+		}
+
+		$scope.aproveItem = function () {
+			itemService
+			.deleteItem($scope.item.id)
+			.success(function () {
+				alertingService.addSuccess("You aproved this item!");
+				updateItem();
+			}).error(function () {
+				alertingService.addDanger(true);
+
+			});
+		}
+
 		$scope.addComment = function () {
 
 
@@ -49,8 +81,7 @@
 		}
 
 		function vote(value) {
-
-			if ($scope.item.voteResult !== undefined) {
+			if ($scope.item.voteResult == undefined) {
 				itemService
 					.vote($scope.item.id, value)
 					.success(function() {
@@ -64,5 +95,5 @@
 
 	};
 
-	app.controller("itemController", ["$scope", "$routeParams", "itemService", "alertingService", itemController]);
+	app.controller("itemController", ["$scope", "$routeParams", "itemService", "alertingService", "$location", "userService", itemController]);
 }(angular.module("Ideas")));

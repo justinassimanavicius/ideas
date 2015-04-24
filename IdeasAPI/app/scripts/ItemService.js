@@ -22,6 +22,14 @@
 			return $http.get('api/entry/' + itemId + '/comment');
 		}
 
+		var deleteItem = function(itemId) {
+			return $http.delete('api/entry/' + itemId);
+		}
+
+		var aproveItem = function (itemId) {
+			return $http.post('api/entry/' + itemId+"/aprove");
+		}
+
 		var saveComment = function (itemId, comment) {
 			return $http.post('api/entry/' + itemId + '/comment', comment);
 		}
@@ -32,7 +40,9 @@
 			saveItem: saveItem,
 			vote: vote,
 			getComments: getComments,
-			saveComment: saveComment
+			saveComment: saveComment,
+			deleteItem: deleteItem,
+			aproveItem: aproveItem
 	}
 	};
 
