@@ -27,8 +27,8 @@
 			$scope.selectedFilter = $scope.myFilter;
 		}
 
-		$scope.showUnaproved = function () {
-			$scope.selectedFilter = $scope.unaprovedFilter;
+		$scope.showUnapproved = function () {
+			$scope.selectedFilter = $scope.unapprovedFilter;
 		}
 
 		$scope.allFilter = null;
@@ -37,7 +37,7 @@
 			return actual.author == $scope.userName;
 		}
 
-		$scope.unaprovedFilter = function (actual, expected) {
+		$scope.unapprovedFilter = function (actual, expected) {
 			return actual.status == "Pending";
 		}
 

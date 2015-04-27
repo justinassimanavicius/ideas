@@ -16,7 +16,7 @@
 						//$scope.isModerator = user.isModerator;
 						$scope.userName = user.name;
 						$scope.canDelete = result.author == user.name;
-						$scope.canAprove = user.isModerator && result.status == "Awaiting analysis";
+						$scope.canApprove = user.isModerator && result.status == "Awaiting analysis";
 					});
 					
 					updateComments();
@@ -44,7 +44,7 @@
 
 		$scope.deleteItem = function () {
 			itemService
-			.deleteItem($scope.item.id)
+			.approveItem($scope.item.id)
 			.success(function () {
 				$location.path('/home');
 			}).error(function () {
@@ -53,11 +53,11 @@
 			});
 		}
 
-		$scope.aproveItem = function () {
+		$scope.approveItem = function () {
 			itemService
-			.deleteItem($scope.item.id)
+			.aproveItem($scope.item.id)
 			.success(function () {
-				alertingService.addSuccess("You aproved this item!");
+				alertingService.addSuccess("You approved this item!");
 				updateItem();
 			}).error(function () {
 				alertingService.addDanger(true);

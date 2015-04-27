@@ -2,14 +2,15 @@
 
 <div ng-show="item.id">
 	<h2 class="title">{{item.title}}</h2>
-	<a class="fui-cross bg-danger text-danger" href="#" ng-click="deleteItem()" ng-show="canDelete"></a>
-	<a class="fui-check bg-success text-success" href="#" ng-click="aproveItem()" ng-show="canAprove"></a>
+	
 	<ul class="list-inline item-meta">
-        <li>{{item.status}}</li>
-        <li><span class="fui-user"></span> {{item.author}}</li>
-        <li><span class="fui-bubble"></span> {{item.comments}}</li>
-        <li><span class="fui-calendar"></span> {{item.createDate}} <span ng-if="item.updateDate != null">(Last update: {{item.updateDate}})</span></span> 
-    </ul>
+		<li>{{item.status}}</li>
+		<li><span class="fui-user"></span> {{item.author}}</li>
+		<li><span class="fui-bubble"></span> {{item.comments}}</li>
+		<li><span class="fui-calendar"></span> {{item.createDate}} <span ng-if="item.updateDate != null">(Last update: {{item.updateDate}})</span></li>
+		<li><a href="#" ng-click="approveItem()" ng-show="canApprove">Approve</a></li>
+		<li><a href="#" ng-click="deleteItem()" ng-show="canDelete">Delete</a></li>
+	</ul>
     <div class="block" ng-if="item.message != null">
         {{item.message}}
     </div>
