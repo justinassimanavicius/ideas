@@ -22,7 +22,7 @@
 		]);
 
 	function redirect(skip, url) {
-		window.location.href = "/ideasapi/"+url;
+		window.location.href = "/"+url;
 	};
    
 }());

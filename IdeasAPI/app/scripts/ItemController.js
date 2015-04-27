@@ -44,7 +44,7 @@
 
 		$scope.deleteItem = function () {
 			itemService
-			.approveItem($scope.item.id)
+			.deleteItem($scope.item.id)
 			.success(function () {
 				$location.path('/home');
 			}).error(function () {
@@ -55,7 +55,7 @@
 
 		$scope.approveItem = function () {
 			itemService
-			.aproveItem($scope.item.id)
+			.approveItem($scope.item.id)
 			.success(function () {
 				alertingService.addSuccess("You approved this item!");
 				updateItem();
