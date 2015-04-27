@@ -26,6 +26,15 @@ namespace IdeasAPI.Controllers
 
 		    if (!entries.Any(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)) return NotFound();
 
+		    var user = UserContext.GetUserInfo(UserHelper.GetUserNameFromIdentity(User.Identity));
+
+		    if (!user.IsModerator)
+		        entries = entries.Where(
+		            x =>
+		                x.Status != EntryStatus.AwaitingApproval || (x.Status == EntryStatus.AwaitingApproval &&
+		                UserHelper.GetUserNameFromComplexUsername(x.Author) ==
+		                UserHelper.GetUserNameFromIdentity(User.Identity))).ToList();
+
             List<EntryView> result = entries
                 .Where(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)
                 .Select(x => new EntryView

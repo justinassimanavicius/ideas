@@ -16,7 +16,7 @@
 						//$scope.isModerator = user.isModerator;
 						$scope.userName = user.name;
 						$scope.canDelete = result.author == user.name;
-						$scope.canApprove = user.isModerator && result.status == "Awaiting analysis";
+						$scope.canApprove = user.isModerator && result.status == "Awaiting approval";
 					});
 					
 					updateComments();
