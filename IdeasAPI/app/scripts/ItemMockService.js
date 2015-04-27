@@ -39,7 +39,7 @@
 			getComments: getComments,
 			saveComment: saveComment,
 			deleteItem: noop,
-			aproveItem: noop
+			approveItem: noop
 		}
 	};
 
