@@ -26,8 +26,8 @@
 			return $http.delete('api/entry/' + itemId);
 		}
 
-		var aproveItem = function (itemId) {
-			return $http.post('api/entry/' + itemId+"/aprove");
+		var approveItem = function (itemId) {
+			return $http.post('api/entry/' + itemId+"/approve");
 		}
 
 		var saveComment = function (itemId, comment) {
@@ -42,7 +42,7 @@
 			getComments: getComments,
 			saveComment: saveComment,
 			deleteItem: deleteItem,
-			aproveItem: aproveItem
+			approveItem: approveItem
 	}
 	};
 
