@@ -1,16 +1,16 @@
 <div ng-show="loading">Loading</div>
 
 <div ng-show="item.id">
-	<h2 class="title">{{item.title}}</h2>
+    <h2 class="title">{{item.title}}</h2>
 	
-	<ul class="list-inline item-meta">
-		<li>{{item.status}}</li>
-		<li><span class="fui-user"></span> {{item.author}}</li>
-		<li><span class="fui-bubble"></span> {{item.comments}}</li>
-		<li><span class="fui-calendar"></span> {{item.createDate}} <span ng-if="item.updateDate != null">(Last update: {{item.updateDate}})</span></li>
-		<li><a href="#" ng-click="approveItem()" ng-show="canApprove">Approve</a></li>
-		<li><a href="#" ng-click="deleteItem()" ng-show="canDelete">Delete</a></li>
-	</ul>
+    <ul class="list-inline item-meta">
+        <li>{{item.status}}</li>
+        <li><span class="fui-user"></span> {{item.author}}</li>
+        <li><span class="fui-bubble"></span> {{item.comments}}</li>
+        <li><span class="fui-calendar"></span> {{item.createDate}} <span ng-if="item.updateDate != null">(Last update: {{item.updateDate}})</span></li>
+        <li><a href="#" ng-click="approveItem()" ng-show="canApprove">Approve</a></li>
+        <li><a href="#" ng-click="deleteItem()" ng-show="canDelete">Delete</a></li>
+    </ul>
     <div class="block" ng-if="item.message != null">
         {{item.message}}
     </div>
@@ -30,20 +30,29 @@
             <input class="btn btn-primary" type="submit" value="Comment!" />
         </form>
     </div>
-    <div class="slats comments">
-        <ul>
-            <li ng-repeat="comment in comments">
-                <div class="slats-content">
-                    <div class="comment">
-                        {{comment.message}}
+    <div class="block">
+        <div class="panel blank-panel">
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="feed-activity-list">
+                            <div class="feed-element" ng-repeat="comment in comments">
+                                <a href="#" class="pull-left">
+                                    <img alt="image" class="img-circle" ng-src="data:image/jpeg;base64,{{comment.authorThumbnail}}">
+                                </a>
+                                <div class="media-body ">
+                                    <!--<small class="pull-right">{{comment.createDate}}</small>-->
+                                    <strong>{{comment.author}}</strong><br>
+                                    <small class="text-muted">{{comment.createDate}}</small>
+                                    <div class="well">
+                                        {{comment.message}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="list-inline">
-                        <li class="author"><span class="fui-user"></span> {{comment.author}}</li>
-                        <li class="date"><span class="fui-calendar"></span> {{comment.createDate}}</li>
-                    </ul>
                 </div>
-            </li>
-            <p class="empty" ng-hide="comments.length">No comments!</p>
-        </ul>
+            </div>
+        </div>
     </div>
 </div>

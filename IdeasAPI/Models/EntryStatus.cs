@@ -25,6 +25,8 @@ namespace IdeasAPI.Models
         [Description("Closed")]
         Closed,
         [Description("Trash")]
-        Trash
+        Trash,
+        [Description("Awaiting approval")]
+        AwaitingApproval
     }
 }

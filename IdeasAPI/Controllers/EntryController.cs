@@ -38,8 +38,8 @@ namespace IdeasAPI.Controllers
                 VoteResult = EntryHelper.UserVoteResult(User.Identity, x.Votes),
                 Comments = x.Comments != null ? x.Comments.Count : 0,
                 Status = x.Status.GetEnumDescription(),
-                CreateDate = x.CreateDate,
-                UpdateDate = x.UpdateDate
+                CreateDate = x.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                UpdateDate = x.UpdateDate.HasValue ? x.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : ""
 		    }).ToList();
 
 		    return Ok(result);
@@ -66,8 +66,8 @@ namespace IdeasAPI.Controllers
                 VoteResult = EntryHelper.UserVoteResult(User.Identity, item.Votes),
                 Comments = item.Comments != null ? item.Comments.Count : 0,
                 Status = item.Status.GetEnumDescription(),
-                CreateDate = item.CreateDate,
-                UpdateDate = item.UpdateDate
+                CreateDate = item.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                UpdateDate = item.UpdateDate.HasValue ? item.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : ""
             };
 
 			return Ok(result);
@@ -84,7 +84,7 @@ namespace IdeasAPI.Controllers
                 entry.Priority = EntryPriority.Minor;
                 entry.SecurityLevel = new List<UserGroup> { UserGroup.None };
                 entry.Source = EntrySource.Web;
-                entry.Status = EntryStatus.Open;
+                entry.Status = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).IsModerator ? EntryStatus.Open : EntryStatus.AwaitingApproval;
                 entry.Visibility = EntryVisibility.Public;
 
                 var item = _db.Entries.Add(entry);
@@ -96,11 +96,11 @@ namespace IdeasAPI.Controllers
                     Id = entry.Id,
                     Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
-                    CreateDate = entry.CreateDate,
+                    CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                     Message = entry.Message,
                     Status = entry.Status.GetEnumDescription(),
                     Title = entry.Title,
-                    UpdateDate = entry.UpdateDate,
+                    UpdateDate = entry.UpdateDate.HasValue ? entry.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
                     Vote = 0,
                     VoteResult = null
                 });
@@ -155,12 +155,130 @@ namespace IdeasAPI.Controllers
                     Id = entry.Id,
                     Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
-                    CreateDate = entry.CreateDate,
+                    CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                     Message = entry.Message,
                     Status = entry.Status.GetEnumDescription(),
                     Visibility = entry.Visibility.GetEnumDescription(),
                     Title = entry.Title,
-                    UpdateDate = entry.UpdateDate,
+                    UpdateDate = entry.UpdateDate.HasValue ? entry.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                    Vote = 0,
+                    VoteResult = null
+                });
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Route("api/entry/{id}/approve")]
+        public IHttpActionResult Approve(int id)
+        {
+            try
+            {
+                Entry entry = _db.Entries.Find(id);
+
+                if (entry == null)
+                {
+                    return NotFound();
+                }
+
+                if (!UserContext.GetUserInfo(User.Identity.Name).IsModerator)
+                {
+                    return BadRequest();
+                }
+
+                entry.Status = EntryStatus.Open;
+
+                _db.Entry(entry).State = EntityState.Modified;
+
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EntryExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return Ok(new EntryView
+                {
+                    Id = entry.Id,
+                    Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Comments = 0,
+                    CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                    Message = entry.Message,
+                    Status = entry.Status.GetEnumDescription(),
+                    Visibility = entry.Visibility.GetEnumDescription(),
+                    Title = entry.Title,
+                    UpdateDate = entry.UpdateDate.HasValue ? entry.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                    Vote = 0,
+                    VoteResult = null
+                });
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Route("api/entry/{id}/disapprove")]
+        public IHttpActionResult Disapprove(int id)
+        {
+            try
+            {
+                Entry entry = _db.Entries.Find(id);
+
+                if (entry == null)
+                {
+                    return NotFound();
+                }
+
+                if (!UserContext.GetUserInfo(User.Identity.Name).IsModerator)
+                {
+                    return BadRequest();
+                }
+
+                entry.Status = EntryStatus.AwaitingApproval;
+
+                _db.Entry(entry).State = EntityState.Modified;
+
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EntryExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return Ok(new EntryView
+                {
+                    Id = entry.Id,
+                    Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Comments = 0,
+                    CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                    Message = entry.Message,
+                    Status = entry.Status.GetEnumDescription(),
+                    Visibility = entry.Visibility.GetEnumDescription(),
+                    Title = entry.Title,
+                    UpdateDate = entry.UpdateDate.HasValue ? entry.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
                     Vote = 0,
                     VoteResult = null
                 });

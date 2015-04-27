@@ -38,7 +38,7 @@
 		}
 
 		$scope.unapprovedFilter = function (actual, expected) {
-			return actual.status == "Pending";
+			return actual.status == "Awaiting approval";
 		}
 
 		$scope.toggleDropdown = function ($event) {

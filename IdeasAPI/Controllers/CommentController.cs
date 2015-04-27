@@ -56,9 +56,10 @@ namespace IdeasAPI.Controllers
             {
                 Id = x.Id,
                 Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
-                CreateDate = x.CreateDate,
-                UpdateDate = x.UpdateDate,
-                Message = x.Message
+                CreateDate = x.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                UpdateDate = x.UpdateDate.HasValue ? x.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                Message = x.Message,
+                AuthorThumbnail = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Thumbnail
             }));
         }
 
@@ -71,13 +72,16 @@ namespace IdeasAPI.Controllers
 
             if (comment == null) return NotFound();
 
+            var author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author));
+
             return Ok(new CommentView
             {
                 Id = comment.Id,
-                Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
-                CreateDate = comment.CreateDate,
-                UpdateDate = comment.UpdateDate,
-                Message = comment.Message
+                Author = author.Name,
+                CreateDate = comment.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                UpdateDate = comment.UpdateDate.HasValue ? comment.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                Message = comment.Message,
+                AuthorThumbnail = author.Thumbnail
             });
         }
 
@@ -111,7 +115,7 @@ namespace IdeasAPI.Controllers
             {
                 Id = comment.Id,
                 Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
-                CreateDate = comment.CreateDate,
+                CreateDate = comment.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                 Message = comment.Message
             });
         }
@@ -142,9 +146,9 @@ namespace IdeasAPI.Controllers
             {
                 Id = comment.Id,
                 Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
-                CreateDate = comment.CreateDate,
+                CreateDate = comment.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                 Message = comment.Message,
-                UpdateDate = comment.UpdateDate
+                UpdateDate = comment.UpdateDate.HasValue ? comment.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : ""
             });
         }
 
