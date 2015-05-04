@@ -12,7 +12,7 @@ namespace IdeasAPI.Code
 {
     public static class UserContext
     {
-        private static readonly MemoryCache _cache = new MemoryCache("Narsyk_Users");
+        private static readonly MemoryCache _cache = new MemoryCache("IdeasUsers");
 
         #region User info
 
