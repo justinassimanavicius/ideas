@@ -48,7 +48,7 @@ namespace IdeasAPI.Controllers
         [ResponseType(typeof(List<CommentView>))]
         public async Task<IHttpActionResult> GetEntryComments(int entryid)
         {
-            var comments = await _db.Comments.Include("Entry").ToListAsync();
+            var comments = await _db.Comments.Include(x=>x.Entry).ToListAsync();
 
             if (comments == null) return NotFound();
 
@@ -68,7 +68,7 @@ namespace IdeasAPI.Controllers
         [ResponseType(typeof(CommentView))]
         public async Task<IHttpActionResult> GetEntryComment(int entryId, int commentId)
         {
-            var comment = await _db.Comments.Include("Entry").SingleOrDefaultAsync(x => x.Id == commentId && x.Entry.Id == entryId);
+            var comment = await _db.Comments.Include(x=>x.Entry).SingleOrDefaultAsync(x => x.Id == commentId && x.Entry.Id == entryId);
 
             if (comment == null) return NotFound();
 

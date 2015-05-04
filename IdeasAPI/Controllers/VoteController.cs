@@ -7,6 +7,7 @@ using IdeasAPI.Code;
 using IdeasAPI.Helpers;
 using IdeasAPI.Models;
 using IdeasAPI.DataContexts;
+using System.Data.Entity;
 
 namespace IdeasAPI.Controllers
 {
@@ -26,7 +27,7 @@ namespace IdeasAPI.Controllers
                 return BadRequest(ModelState);
             }
 			 
-            var entry = _db.Entries.Include("Votes").SingleOrDefault(x => x.Id == id);
+            var entry = _db.Entries.Include(x=>x.Votes).SingleOrDefault(x => x.Id == id);
 
             if (entry == null) return NotFound();
 

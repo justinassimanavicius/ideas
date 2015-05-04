@@ -22,7 +22,7 @@ namespace IdeasAPI.Controllers
 		[Route("api/entry")]
 		public IHttpActionResult Get()
 		{
-		    List<Entry> entries = _db.Entries.Include("Votes").Include("Comments").ToList();
+		    List<Entry> entries = _db.Entries.Include(x=>x.Votes).Include(x=>x.Comments).ToList();
 
 		    if (!entries.Any(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)) return NotFound();
 
@@ -58,7 +58,7 @@ namespace IdeasAPI.Controllers
 		[Route("api/entry/{id}")]
 		public IHttpActionResult Get(int id)
 		{
-            var item = _db.Entries.Include("Votes").Include("Comments").SingleOrDefault(x => x.Id == id && x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden);
+            var item = _db.Entries.Include(x => x.Votes).Include(x => x.Comments).SingleOrDefault(x => x.Id == id && x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden);
 
 			if (item == null)
 			{
