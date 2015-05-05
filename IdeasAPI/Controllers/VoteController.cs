@@ -15,6 +15,12 @@ namespace IdeasAPI.Controllers
     public class VoteController : ApiController
     {
         private readonly IdeasDb _db = new IdeasDb();
+        private readonly UserContext _userContext;
+
+        public VoteController(UserContext userContext)
+        {
+            _userContext = userContext;
+        }
 
         // POST api/Vote
         [ResponseType(typeof(Vote))]
@@ -50,7 +56,7 @@ namespace IdeasAPI.Controllers
 			return Created(location, new VoteView
 			{
 				Id = vote.Id,
-				Author = UserContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
+                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
 				CreateDate = vote.CreateDate,
 				IsPositive = voteView.IsPositive
 			}); 

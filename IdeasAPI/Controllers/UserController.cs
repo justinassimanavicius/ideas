@@ -9,9 +9,11 @@ namespace IdeasAPI.Controllers
     public class UserController : ApiController
     {
         private readonly IdeasGlobalSettings _config;
+        private readonly UserContext _userContext;
 
-        public UserController(IConfigurationLoaderService configurationLoaderService)
+        public UserController(IConfigurationLoaderService configurationLoaderService, UserContext userContext)
         {
+            _userContext = userContext;
             _config = configurationLoaderService.LoadConfig<IdeasGlobalSettings>();
         }
 
@@ -19,7 +21,7 @@ namespace IdeasAPI.Controllers
         public IHttpActionResult Get()
         {
             //Tries to get cacheable user info from AD
-            var user = UserContext.GetUserInfo(User.Identity.Name);
+            var user = _userContext.GetUserInfo(User.Identity.Name);
 
             if (user == null)
             {
@@ -37,7 +39,7 @@ namespace IdeasAPI.Controllers
         public IHttpActionResult GetInfo(string userName)
         {
             //Tries to get cacheable user info from AD
-            var user = UserContext.GetUserInfo(userName);
+            var user = _userContext.GetUserInfo(userName);
 
             if (user == null)
             {
