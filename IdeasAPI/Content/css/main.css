@@ -6544,13 +6544,7 @@ footer .logo img {
   height: 38px;
 }
 .feed-element .well {
-  border: 1px solid #e7eaec;
-  box-shadow: none;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  padding: 10px 20px;
-  font-size: 11px;
-  line-height: 16px;
+ box-shadow: none;
 }
 .feed-element .actions {
   margin-top: 10px;
