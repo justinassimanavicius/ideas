@@ -32,7 +32,7 @@ namespace IdeasAPI.Controllers
         [HttpPost]
         public ActionResult Login(Login model)
         {
-            if (!LoginValid(model) && false)
+            if (!LoginValid(model))
             {
                 ViewBag.Error = "Oops! Check your credentials and try again.";
                 return View(new Login { Username = model.Username });
