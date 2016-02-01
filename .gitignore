@@ -102,3 +102,4 @@ Backup*/
 UpgradeLog*.XML
 *.orig
 config.codekit
+.vs/config/applicationhost.config

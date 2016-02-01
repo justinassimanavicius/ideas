@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<base href="/ideasapi/">
+	<base href="/">
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge; chrome=1">
@@ -22,13 +22,15 @@
 	<script src="app/scripts/app.js"></script>
 	<script src="app/scripts/homecontroller.js"></script>
 	<script src="app/scripts/itemcontroller.js"></script>
-	
+
+    <!--
     <script src="app/scripts/itemMockService.js"></script>
-	<script src="app/scripts/UserServiceMock.js"></script>
+    <script src="app/scripts/UserServiceMock.js"></script>
+        -->
 	<script src="app/scripts/createItemController.js"></script>
     
-<!--	<script src="app/scripts/UserService.js"></script>
-    <script src="app/scripts/ItemService.js"></script>-->
+	<script src="app/scripts/UserService.js"></script>
+    <script src="app/scripts/ItemService.js"></script>
 	
 	<script src="app/scripts/userController.js"></script>
 	<script src="app/scripts/CreateItemDirective.js"></script>	
@@ -38,8 +40,24 @@
 	<script src="app/scripts/AlertingService.js"></script>
 	<script src="app/scripts/AlertsDirective.js"></script>
 	<script src="app/scripts/RequestInterceptor.js"></script>
-	
 
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-73201701-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 
 </head>
 <body ng-app="Ideas">

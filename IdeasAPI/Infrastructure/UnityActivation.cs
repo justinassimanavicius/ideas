@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ideas.BusinessLogic.Factories;
+using IdeasAPI.Helpers;
 using Microsoft.Practices.Unity;
 
-namespace Ideas.BusinessLogic.Infrastructure
+namespace IdeasAPI.Infrastructure
 {
     public static class UnityActivation
     {
@@ -15,6 +12,12 @@ namespace Ideas.BusinessLogic.Infrastructure
         public static void Activate()
         {
             Container = ServiceContainerFactory.CreateUnityContainer();
+
+            Container.RegisterType<IUserRepository, UserRepository>(new ContainerControlledLifetimeManager());
+
+#if DEBUG
+            Container.RegisterType<IUserRepository, FakeUserRepository>(new ContainerControlledLifetimeManager());
+#endif
         }
 
         public static object Resolve(Type typeToResolve)

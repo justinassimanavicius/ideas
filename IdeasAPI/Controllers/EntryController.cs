@@ -17,7 +17,7 @@ namespace IdeasAPI.Controllers
     public class EntryController : ApiController
     {
         private readonly IdeasDb _db = new IdeasDb();
-        private UserContext _userContext;
+        private readonly UserContext _userContext;
 
         public EntryController(UserContext userContext)
         {

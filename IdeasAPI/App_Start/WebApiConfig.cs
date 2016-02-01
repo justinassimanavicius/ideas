@@ -27,6 +27,8 @@ namespace IdeasAPI
 			var settings = jsonFormatter.SerializerSettings;
 			settings.Formatting = Formatting.Indented;
 			settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            config.Filters.Add(new NlogExceptionFilterAttribute());
         }
     }
 }

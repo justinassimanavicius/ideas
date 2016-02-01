@@ -13,6 +13,12 @@ namespace IdeasAPI.Code
     public class UserContext
     {
         private static readonly MemoryCache _cache = new MemoryCache("IdeasUsers");
+        private readonly IUserRepository _userRepository;
+
+        public UserContext(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         #region User info
 
@@ -22,14 +28,7 @@ namespace IdeasAPI.Code
 
             if (_cache[key] != null) return _cache[key] as User;
 
-            try
-            {
-                    UpdateCacheElement(key, UserHelper.GetUserFromADByUserName(userName), 3600);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            UpdateCacheElement(key, _userRepository.GetUser(userName), 3600);
 
             return _cache[key] as User;
         }
