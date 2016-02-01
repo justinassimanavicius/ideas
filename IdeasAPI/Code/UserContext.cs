@@ -10,13 +10,13 @@ using IdeasAPI.Models;
 
 namespace IdeasAPI.Code
 {
-    public static class UserContext
+    public class UserContext
     {
         private static readonly MemoryCache _cache = new MemoryCache("IdeasUsers");
 
         #region User info
 
-        public static User GetUserInfo(string userName)
+        public virtual User GetUserInfo(string userName)
         {
             var key = "accountInfo_" + userName;
 
