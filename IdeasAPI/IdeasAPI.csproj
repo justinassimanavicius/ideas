@@ -40,6 +40,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -193,10 +197,17 @@
     <Compile Include="Code\UserContext.cs" />
     <Compile Include="Controllers\AuthenticationService.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201602012254012_User.cs" />
+    <Compile Include="DataContexts\IdeasMigrations\201602012254012_User.Designer.cs">
+      <DependentUpon>201602012254012_User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\FakeUserRepository.cs" />
+    <Compile Include="Helpers\IMailer.cs" />
     <Compile Include="Helpers\IUserRepository.cs" />
+    <Compile Include="Helpers\SearchResultExtensions.cs" />
     <Compile Include="Helpers\UserRepository.cs" />
     <Compile Include="Infrastructure\UnityActivation.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
@@ -234,7 +245,7 @@
     <Compile Include="Models\EntryStatus.cs" />
     <Compile Include="Models\EntryView.cs" />
     <Compile Include="Models\EntryVisibility.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\LdapUser.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\VoteView.cs" />
     <Compile Include="Models\Vote.cs" />
@@ -957,6 +968,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdeasMigrations\201504111001596_Votes.resx">
       <DependentUpon>201504111001596_Votes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\IdeasMigrations\201602012254012_User.resx">
+      <DependentUpon>201602012254012_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

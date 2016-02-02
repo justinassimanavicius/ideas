@@ -10,5 +10,7 @@ namespace IdeasAPI.Models
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public Entry Entry { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
     }
 }

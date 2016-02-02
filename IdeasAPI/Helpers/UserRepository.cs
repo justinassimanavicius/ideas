@@ -5,9 +5,9 @@ namespace IdeasAPI.Helpers
 {
     public class UserRepository : IUserRepository
     {
-        public User GetUser(string userName)
+        public LdapUser GetUser(string userName)
         {
-            var result = new User();
+            var result = new LdapUser();
 
             var domain = "WEBMEDIA";
 

@@ -24,5 +24,7 @@ namespace IdeasAPI.Models
         public EntryPriority Priority { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Vote> Votes { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
     }
 }

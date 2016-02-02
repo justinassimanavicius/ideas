@@ -21,7 +21,7 @@ namespace IdeasAPI.Controllers
         public IHttpActionResult Get()
         {
             //Tries to get cacheable user info from AD
-            var user = _userContext.GetUserInfo(User.Identity.Name);
+            var user = _userContext.GetUser(User.Identity.Name);
 
             if (user == null)
             {
@@ -39,7 +39,7 @@ namespace IdeasAPI.Controllers
         public IHttpActionResult GetInfo(string userName)
         {
             //Tries to get cacheable user info from AD
-            var user = _userContext.GetUserInfo(userName);
+            var user = _userContext.GetUser(userName);
 
             if (user == null)
             {

@@ -4,13 +4,14 @@ namespace IdeasAPI.Helpers
 {
     public class FakeUserRepository : IUserRepository
     {
-        public User GetUser(string userName)
+        public LdapUser GetUser(string userName)
         {
-            return new User
+            return new LdapUser
             {
                 DomainName = userName,
                 Name = userName,
-                ShortName = userName
+                ShortName = userName,
+                Email = userName+"@"+userName+".com"
             };
         }
     }

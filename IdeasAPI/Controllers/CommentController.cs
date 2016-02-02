@@ -20,10 +20,12 @@ namespace IdeasAPI.Controllers
     {
         private readonly IdeasDb _db = new IdeasDb();
         private readonly UserContext _userContext;
+        private readonly IMailer _mailer;
 
-        public CommentController(UserContext userContext)
+        public CommentController(UserContext userContext, IMailer mailer)
         {
             _userContext = userContext;
+            _mailer = mailer;
         }
 
         #region GET
@@ -58,14 +60,18 @@ namespace IdeasAPI.Controllers
 
             if (comments == null) return NotFound();
 
-            return Ok(comments.Where(x => x.Entry.Id == entryid).Select(x => new CommentView
+            return Ok(comments.Where(x => x.Entry.Id == entryid).Select(x =>
             {
-                Id = x.Id,
-                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
-                CreateDate = x.CreateDate.ToString("yyyy-MM-dd HH:mm"),
-                UpdateDate = x.UpdateDate.HasValue ? x.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
-                Message = x.Message,
-                AuthorThumbnail = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Thumbnail
+                var user = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(x.Author));
+                return new CommentView
+                {
+                    Id = x.Id,
+                    Author = user.Name,
+                    CreateDate = x.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                    UpdateDate = x.UpdateDate?.ToString("yyyy-MM-dd HH:mm") ?? "",
+                    Message = x.Message,
+                    AuthorThumbnail = user.Thumbnail
+                };
             }));
         }
 
@@ -78,14 +84,14 @@ namespace IdeasAPI.Controllers
 
             if (comment == null) return NotFound();
 
-            var author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author));
+            var author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(comment.Author));
 
             return Ok(new CommentView
             {
                 Id = comment.Id,
                 Author = author.Name,
                 CreateDate = comment.CreateDate.ToString("yyyy-MM-dd HH:mm"),
-                UpdateDate = comment.UpdateDate.HasValue ? comment.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : "",
+                UpdateDate = comment.UpdateDate?.ToString("yyyy-MM-dd HH:mm") ?? "",
                 Message = comment.Message,
                 AuthorThumbnail = author.Thumbnail
             });
@@ -106,21 +112,26 @@ namespace IdeasAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var entry = _db.Entries.Find(entryId);
+            var entry = _db.Entries.Include(x => x.User).First(x=>x.Id == entryId);
 
+            var userName = UserHelper.GetUserNameFromIdentity(User.Identity);
+            var user = _userContext.GetUser(userName);
             comment.CreateDate = DateTime.Now;
-            comment.Author = UserHelper.GetUserNameFromIdentity(User.Identity);
+            comment.Author = userName;
             comment.Entry = entry;
+            comment.UserId = user.Id;
 
             _db.Comments.Add(comment);
             await _db.SaveChangesAsync();
 
-            var location = String.Format("api/entry/{0}/comment/{1}", comment.Entry.Id, comment.Id);
+            var location = $"api/entry/{comment.Entry.Id}/comment/{comment.Id}";
+
+            _mailer.InformAboutComment(comment);
 
             return Created(location, new CommentView
             {
                 Id = comment.Id,
-                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
                 CreateDate = comment.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                 Message = comment.Message
             });
@@ -140,7 +151,7 @@ namespace IdeasAPI.Controllers
                 return NotFound();
             }
 
-            if (comment.Author != _userContext.GetUserInfo(User.Identity.Name).DomainName)
+            if (comment.Author != _userContext.GetUser(User.Identity.Name).DomainName)
             {
                 return BadRequest();
             }
@@ -151,7 +162,7 @@ namespace IdeasAPI.Controllers
             return Ok(new CommentView
             {
                 Id = comment.Id,
-                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
+                Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(comment.Author)).Name,
                 CreateDate = comment.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                 Message = comment.Message,
                 UpdateDate = comment.UpdateDate.HasValue ? comment.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : ""

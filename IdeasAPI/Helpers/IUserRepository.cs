@@ -4,6 +4,6 @@ namespace IdeasAPI.Helpers
 {
     public interface IUserRepository
     {
-        User GetUser(string userName);
+        LdapUser GetUser(string userName);
     }
 }

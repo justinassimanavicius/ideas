@@ -1,5 +1,6 @@
 ﻿using System;
 using Ideas.BusinessLogic.Factories;
+using IdeasAPI.Code;
 using IdeasAPI.Helpers;
 using Microsoft.Practices.Unity;
 
@@ -14,6 +15,8 @@ namespace IdeasAPI.Infrastructure
             Container = ServiceContainerFactory.CreateUnityContainer();
 
             Container.RegisterType<IUserRepository, UserRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<UserContext, UserContext>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IMailer, Mailer>(new ContainerControlledLifetimeManager());
 
 #if DEBUG
             Container.RegisterType<IUserRepository, FakeUserRepository>(new ContainerControlledLifetimeManager());

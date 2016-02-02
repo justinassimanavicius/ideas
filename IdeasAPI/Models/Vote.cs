@@ -12,5 +12,7 @@ namespace IdeasAPI.Models
         public string Author { get; set; }
         public DateTime CreateDate { get; set; }
         public Entry Entry { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
     }
 }

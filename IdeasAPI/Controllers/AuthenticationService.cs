@@ -9,6 +9,7 @@ namespace IdeasAPI.Controllers
         {
             using (var pc = new PrincipalContext(ContextType.Domain, "WEBMEDIA"))
             {
+                
                 // validate the credentials
                 return pc.ValidateCredentials(credentials.Username, credentials.Password);
             }

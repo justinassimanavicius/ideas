@@ -16,10 +16,12 @@ namespace IdeasAPI.Controllers
     {
         private readonly IdeasDb _db = new IdeasDb();
         private readonly UserContext _userContext;
+        private readonly IMailer _mailer;
 
-        public VoteController(UserContext userContext)
+        public VoteController(UserContext userContext, IMailer mailer)
         {
             _userContext = userContext;
+            _mailer = mailer;
         }
 
         // POST api/Vote
@@ -33,7 +35,7 @@ namespace IdeasAPI.Controllers
                 return BadRequest(ModelState);
             }
 			 
-            var entry = _db.Entries.Include(x=>x.Votes).SingleOrDefault(x => x.Id == id);
+            var entry = _db.Entries.Include(x => x.Votes).Include(x => x.User).SingleOrDefault(x => x.Id == id);
 
             if (entry == null) return NotFound();
 
@@ -41,22 +43,28 @@ namespace IdeasAPI.Controllers
 
             if (userVoteResult != null) return BadRequest();
 
+            var userName = UserHelper.GetUserNameFromIdentity(User.Identity);
+            var user = _userContext.GetUser(userName);
+
             var vote = new Vote
             {
                 Author = UserHelper.GetUserNameFromIdentity(User.Identity),
                 CreateDate = DateTime.Now,
                 Entry = entry,
-                IsPositive = voteView.IsPositive
+                IsPositive = voteView.IsPositive,
+                UserId = user.Id
             };
 
             _db.Votes.Add(vote);
             await _db.SaveChangesAsync();
 
-            var location = string.Format("api/entry/{0}", vote.Entry.Id);
+            _mailer.InformAboutVote(entry);
+
+            var location = $"api/entry/{vote.Entry.Id}";
 			return Created(location, new VoteView
 			{
 				Id = vote.Id,
-                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
+                Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(vote.Author)).Name,
 				CreateDate = vote.CreateDate,
 				IsPositive = voteView.IsPositive
 			}); 

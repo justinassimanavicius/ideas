@@ -30,9 +30,9 @@ namespace IdeasAPI.Controllers
 		{
 		    List<Entry> entries = _db.Entries.Include(x=>x.Votes).Include(x=>x.Comments).ToList();
 
-		    if (!entries.Any(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)) return NotFound();
+		    if (!entries.Any(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)) return Ok(new List<int>());
 
-            var user = _userContext.GetUserInfo(UserHelper.GetUserNameFromIdentity(User.Identity));
+            var user = _userContext.GetUser(UserHelper.GetUserNameFromIdentity(User.Identity));
 
 		    if (!user.IsModerator)
 		        entries = entries.Where(
@@ -43,19 +43,23 @@ namespace IdeasAPI.Controllers
 
             List<EntryView> result = entries
                 .Where(x => x.Status != EntryStatus.Trash && x.Visibility != EntryVisibility.Hidden)
-                .Select(x => new EntryView
-		    {
-		        Id = x.Id,
-                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(x.Author)).Name,
-		        Title = x.Title,
-		        Message = x.Message,
-		        Vote = EntryHelper.GetVotes(x.Votes),
-                VoteResult = EntryHelper.UserVoteResult(User.Identity, x.Votes),
-                Comments = x.Comments != null ? x.Comments.Count : 0,
-                Status = x.Status.GetEnumDescription(),
-                CreateDate = x.CreateDate.ToString("yyyy-MM-dd HH:mm"),
-                UpdateDate = x.UpdateDate.HasValue ? x.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : ""
-		    }).ToList();
+                .Select(x =>
+                {
+                    var author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(x.Author));
+                    return new EntryView
+                    {
+                        Id = x.Id,
+                        Author = author.Name,
+                        Title = x.Title,
+                        Message = x.Message,
+                        Vote = EntryHelper.GetVotes(x.Votes),
+                        VoteResult = EntryHelper.UserVoteResult(User.Identity, x.Votes),
+                        Comments = x.Comments != null ? x.Comments.Count : 0,
+                        Status = x.Status.GetEnumDescription(),
+                        CreateDate = x.CreateDate.ToString("yyyy-MM-dd HH:mm"),
+                        UpdateDate = x.UpdateDate.HasValue ? x.UpdateDate.Value.ToString("yyyy-MM-dd HH:mm") : ""
+                    };
+                }).ToList();
 
 		    return Ok(result);
 		}
@@ -74,7 +78,7 @@ namespace IdeasAPI.Controllers
             var result = new EntryView
             {
                 Id = item.Id,
-                Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(item.Author)).Name,
+                Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(item.Author)).Name,
                 Title = item.Title,
                 Message = item.Message,
                 Vote = EntryHelper.GetVotes(item.Votes),
@@ -94,13 +98,16 @@ namespace IdeasAPI.Controllers
 		{
             try
             {
+                var userName = UserHelper.GetUserNameFromIdentity(User.Identity);
+                var user = _userContext.GetUser(userName);
                 entry.CreateDate = DateTime.Now;
                 entry.Author = UserHelper.GetUserNameFromIdentity(User.Identity);
                 entry.Priority = EntryPriority.Minor;
                 entry.SecurityLevel = new List<UserGroup> { UserGroup.None };
                 entry.Source = EntrySource.Web;
-                entry.Status = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).IsModerator ? EntryStatus.Open : EntryStatus.AwaitingApproval;
+                entry.Status = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(entry.Author)).IsModerator ? EntryStatus.Open : EntryStatus.AwaitingApproval;
                 entry.Visibility = EntryVisibility.Public;
+                entry.UserId = user.Id;
 
                 var item = _db.Entries.Add(entry);
                 _db.SaveChanges();
@@ -109,7 +116,7 @@ namespace IdeasAPI.Controllers
                 return Created(location, new EntryView
                 {
                     Id = entry.Id,
-                    Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
                     CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                     Message = entry.Message,
@@ -139,7 +146,7 @@ namespace IdeasAPI.Controllers
                     return NotFound();
                 }
 
-                if (entry.Author != _userContext.GetUserInfo(User.Identity.Name).DomainName)
+                if (entry.Author != _userContext.GetUser(User.Identity.Name).DomainName)
                 {
                     return BadRequest();
                 }
@@ -168,7 +175,7 @@ namespace IdeasAPI.Controllers
                 return Ok(new EntryView
                 {
                     Id = entry.Id,
-                    Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
                     CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                     Message = entry.Message,
@@ -199,7 +206,7 @@ namespace IdeasAPI.Controllers
                     return NotFound();
                 }
 
-                if (!_userContext.GetUserInfo(User.Identity.Name).IsModerator)
+                if (!_userContext.GetUser(User.Identity.Name).IsModerator)
                 {
                     return BadRequest();
                 }
@@ -227,7 +234,7 @@ namespace IdeasAPI.Controllers
                 return Ok(new EntryView
                 {
                     Id = entry.Id,
-                    Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
                     CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                     Message = entry.Message,
@@ -258,7 +265,7 @@ namespace IdeasAPI.Controllers
                     return NotFound();
                 }
 
-                if (!_userContext.GetUserInfo(User.Identity.Name).IsModerator)
+                if (!_userContext.GetUser(User.Identity.Name).IsModerator)
                 {
                     return BadRequest();
                 }
@@ -286,7 +293,7 @@ namespace IdeasAPI.Controllers
                 return Ok(new EntryView
                 {
                     Id = entry.Id,
-                    Author = _userContext.GetUserInfo(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
+                    Author = _userContext.GetUser(UserHelper.GetUserNameFromComplexUsername(entry.Author)).Name,
                     Comments = 0,
                     CreateDate = entry.CreateDate.ToString("yyyy-MM-dd HH:mm"),
                     Message = entry.Message,
